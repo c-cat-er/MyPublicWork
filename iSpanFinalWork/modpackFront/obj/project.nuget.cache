@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IKZfxflEsFdYQYJfLAYxw/6Tsc1/KMWVHrk3EAPC3516HrVx/N7Uy3P1uUo0jnW9XmLQWwVUE1+8sqKKsXthUQ==",
+  "dgSpecHash": "R0/+acO3wfdNn6XEcRsaUnREggWjyjK/BOWirCu98rq0b+55W1JPsd9O2RG5LjORCj8mQu3Oj5w8pxOMni2PWA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackFront\\modpackFront.csproj",
+  "projectFilePath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackFront\\modpackFront.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\iSpan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\iSpan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

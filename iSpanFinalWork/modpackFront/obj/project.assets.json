@@ -8905,11 +8905,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackFront\\modpackFront.csproj",
+      "projectUniqueName": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackFront\\modpackFront.csproj",
       "projectName": "modpackFront",
-      "projectPath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackFront\\modpackFront.csproj",
+      "projectPath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackFront\\modpackFront.csproj",
       "packagesPath": "C:\\Users\\iSpan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackFront\\obj\\",
+      "outputPath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackFront\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -8762,11 +8762,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackApi\\modpackApi.csproj",
+      "projectUniqueName": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackApi\\modpackApi.csproj",
       "projectName": "modpackApi",
-      "projectPath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackApi\\modpackApi.csproj",
+      "projectPath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackApi\\modpackApi.csproj",
       "packagesPath": "C:\\Users\\iSpan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackApi\\obj\\",
+      "outputPath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

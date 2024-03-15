@@ -9224,11 +9224,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpack\\modpack.csproj",
+      "projectUniqueName": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpack\\modpack.csproj",
       "projectName": "modpack",
-      "projectPath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpack\\modpack.csproj",
+      "projectPath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpack\\modpack.csproj",
       "packagesPath": "C:\\Users\\iSpan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpack\\obj\\",
+      "outputPath": "C:\\Users\\iSpan\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpack\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
