@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
 using modpack.Controllers;
 using modpack.Data;
-using modpack.Hub;
 using modpack.Models;
 using modpack.Service;
 

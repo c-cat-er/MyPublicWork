@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WTi53cNOrLI8pzfNIGWsvTcfPM91IaG7YQBwn/PLDaE=",
+  "Hash": "n5ITLwRypNubSEjgUZIqTur9uJOZBBFFKTI0dXCfxJo=",
   "Source": "modpackApi",
   "BasePath": "_content/modpackApi",
   "Mode": "Default",
@@ -9,10 +9,10 @@
   "DiscoveryPatterns": [],
   "Assets": [
     {
-      "Identity": "C:\\Users\\iSpan\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
+      "Identity": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\iSpan\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "AssetKind": "All",
@@ -25,13 +25,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\iSpan\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\iSpan\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\QuickGrid.razor.js",
+      "Identity": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\QuickGrid.razor.js",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\iSpan\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "QuickGrid.razor.js",
       "AssetKind": "All",
@@ -44,13 +44,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\iSpan\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\QuickGrid.razor.js"
+      "OriginalItemSpec": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.2\\staticwebassets\\QuickGrid.razor.js"
     },
     {
-      "Identity": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackApi\\obj\\Debug\\net8.0\\scopedcss\\bundle\\modpackApi.styles.css",
+      "Identity": "C:\\Users\\User\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackApi\\obj\\Debug\\net8.0\\scopedcss\\bundle\\modpackApi.styles.css",
       "SourceId": "modpackApi",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackApi\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\User\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackApi\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/modpackApi",
       "RelativePath": "modpackApi.styles.css",
       "AssetKind": "All",
@@ -63,7 +63,7 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\iSpan\\Documents\\GitHub\\modpack2\\modpackApi\\obj\\Debug\\net8.0\\scopedcss\\bundle\\modpackApi.styles.css"
+      "OriginalItemSpec": "C:\\Users\\User\\Documents\\GitHub\\MyPublicWork\\iSpanFinalWork\\modpackApi\\obj\\Debug\\net8.0\\scopedcss\\bundle\\modpackApi.styles.css"
     }
   ]
 }

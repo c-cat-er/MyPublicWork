@@ -17,311 +17,311 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = modpack
 build_property.RootNamespace = modpack
-build_property.ProjectDir = C:\Users\iSpan\Documents\GitHub\MyPublicWork\iSpanFinalWork\modpack\
+build_property.ProjectDir = C:\Users\User\Documents\GitHub\MyPublicWork\iSpanFinalWork\modpack\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\iSpan\Documents\GitHub\MyPublicWork\iSpanFinalWork\modpack
+build_property.MSBuildProjectDirectory = C:\Users\User\Documents\GitHub\MyPublicWork\iSpanFinalWork\modpack
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/ChartjsBarTwo.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/ChartjsBarTwo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xDaGFydGpzQmFyVHdvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/ChartjsLine.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/ChartjsLine.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xDaGFydGpzTGluZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/DataDetails.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/DataDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xEYXRhRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/DataList.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/DataList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xEYXRhTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminDataAnlysis/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXRhQW5seXNpc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5FbXBsb3llZUluZm9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5FbXBsb3llZUluZm9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Details.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5FbXBsb3llZUluZm9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5FbXBsb3llZUluZm9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminEmployeeInfo/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5FbXBsb3llZUluZm9cTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5JbWFnZUNhcm91c2VsXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5JbWFnZUNhcm91c2VsXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5JbWFnZUNhcm91c2VsXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminImageCarousel/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5JbWFnZUNhcm91c2VsXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5NZW1iZXJJbmZvXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5NZW1iZXJJbmZvXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Details.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5NZW1iZXJJbmZvXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5NZW1iZXJJbmZvXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminMemberInfo/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5NZW1iZXJJbmZvXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TZXJ2aWNlUmVjb3Jkc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TZXJ2aWNlUmVjb3Jkc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Details.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TZXJ2aWNlUmVjb3Jkc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TZXJ2aWNlUmVjb3Jkc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TZXJ2aWNlUmVjb3Jkc1xMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/ReplyTwo.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminServiceRecords/ReplyTwo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TZXJ2aWNlUmVjb3Jkc1xSZXBseVR3by5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminUser/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminUser/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Vc2VyXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminUser/Index.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminUser/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Vc2VyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminUser/Login.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/AdminUser/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5Vc2VyXExvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50c1xMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/ViewImage.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Components/ViewImage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcG9uZW50c1xWaWV3SW1hZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Customized/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Customized/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9taXplZFxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Customized/ViewImage.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Customized/ViewImage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9taXplZFxWaWV3SW1hZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Inspiration/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Inspiration/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zcGlyYXRpb25cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Inspiration/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Inspiration/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zcGlyYXRpb25cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Inspiration/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Inspiration/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zcGlyYXRpb25cTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderDetail.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderEdit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderPaymentDetail.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderPaymentDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJQYXltZW50RGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderPaymentEdit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderPaymentEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJQYXltZW50RWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderShippingDetail.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderShippingDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJTaGlwcGluZ0RldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderShippingEdit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Order/OrderShippingEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJTaGlwcGluZ0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Products/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Products/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Products/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Products/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Products/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Products/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Details.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Index.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/PromoCode/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/PromoCode/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW9Db2RlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/PromoCode/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/PromoCode/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW9Db2RlXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/PromoCode/List.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/PromoCode/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvbW9Db2RlXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/Error.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVMb2NhdGlvbnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVMb2NhdGlvbnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Details.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVMb2NhdGlvbnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVMb2NhdGlvbnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Index.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/StoreLocations/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVMb2NhdGlvbnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Create.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdE9yZGVyc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Delete.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdE9yZGVyc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Details.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdE9yZGVyc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Edit.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdE9yZGVyc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Index.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/TestOrders/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdE9yZGVyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/_ViewImports.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/_ViewStart.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iSpan/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/_Layout.cshtml]
+[C:/Users/User/Documents/GitHub/MyPublicWork/iSpanFinalWork/modpack/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-5mmtu2shl1
