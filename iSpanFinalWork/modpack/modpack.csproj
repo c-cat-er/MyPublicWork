@@ -36,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\AdminDataAnlysis\ChartjsBar.cshtml" />
     <Content Remove="Views\AdminEmployeeInfo\Index.cshtml" />
     <Content Remove="Views\AdminUser\Create.cshtml" />
     <Content Remove="Views\AdminUser\Delete.cshtml" />
@@ -44,6 +43,23 @@
     <Content Remove="Views\AdminUser\List.cshtml" />
     <Content Remove="Views\AdminUser\Welcome.cshtml" />
     <Content Remove="wwwroot\css\Login.cshtml.cs" />
+    <Content Remove="wwwroot\css\Login2.scss" />
+    <Content Remove="wwwroot\images\carousel\carousel08183.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel23.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel24.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel378c2.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel4a530.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel4f70a.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel5.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel6.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel601a0.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel7.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel72310.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel8.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel86d59.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousel9.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carousela7984.jpeg" />
+    <Content Remove="wwwroot\images\carousel\carouselfc8.jpeg" />
     <Content Remove="wwwroot\images\modpack_logo.svg" />
   </ItemGroup>
 
@@ -56,8 +72,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.Json" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>

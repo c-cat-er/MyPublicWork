@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using modpackApi.DTO;
@@ -44,17 +45,15 @@ namespace modpackApi.Controllers
                     }).FirstOrDefaultAsync());
         }
 
-        [HttpGet("memberproduct/{id}/{memberid}")]
+        [HttpGet("memberproduct/{id}/{memberid}")]//客製化產品
         public async Task<string> GetmemberProductss(int id, int memberid)
         {
-            var query = _context.InspirationSpecifications
-                .Where(insp => insp.InspirationSpecificationId == id)
-                .Join(_context.Components, insp => insp.ComponentId, comp => comp.ComponentId, (insp, comp) => new { insp, comp })
-                .Where(joinResult => joinResult.comp.Category == "主包")
-                .Join(_context.CustomizedSpecifications, joinResult => joinResult.comp.ComponentId, spec => spec.ComponentId, (joinResult, spec) => new { joinResult, spec })
-                .Select(joinResult => joinResult.spec.CustomizedId)
-                .Join(_context.Customizeds, spec => spec, cust => cust.CustomizedId, (spec, cust) => new { spec, cust })
-                .Where(joinResult => joinResult.cust.MemberId == memberid);
+            var inspirationName = _context.Inspirations
+                .Where(insp => insp.InspirationId == id)
+                .Select(e => e.Name)
+                .FirstOrDefault();
+            var query = _context.Customizeds
+                .Where(cust => cust.Name.Contains(inspirationName) && cust.MemberId == memberid);
             return JsonSerializer.Serialize(await _context.Inspirations
                 .Include(e => e.Promotion)
                 .Where(e => e.InspirationId == id)
@@ -66,18 +65,20 @@ namespace modpackApi.Controllers
                     Name = e.Name,
                     ImageFileName = e.ImageFileName,
                     SalePrice = (float)e.SalePrice,
-                    Customizedid = query.Select(joinResult => joinResult.cust.CustomizedId).ToList(),
-                    CustomizedSalePrice = query.Select(joinResult => (float)joinResult.cust.SalePrice).ToList(),
-                    CustomizedImageFileName = query.Select(joinResult => joinResult.cust.ImageFileName).ToList(),
+                    Customizedid = query.Select(Result => Result.CustomizedId).ToList(),
+                    CustomizedName=query.Select(Result => Result.Name).ToList(),
+                    CustomizedSalePrice = query.Select(Result => (float)Result.SalePrice).ToList(),
+                    CustomizedImageFileName = query.Select(Result => Result.ImageFileName).ToList(),
                 }).FirstOrDefaultAsync());
         }
-        [HttpGet("product/member/{id}/{memberid}")]
+        [HttpGet("product/member/{id}/{memberid}")]//已購買產品
         public async Task<string> GetmemberProductssAndPurchasedproducts(int id, int memberid)
         {
             var purchasedProducts = await _context.Orders
                 .Where(o => o.MemberId == memberid)
                 .SelectMany(o => o.OrderDetails.Select(od => od.Product))
                 .ToListAsync();
+            purchasedProducts.RemoveAll(item => item == null);
             return JsonSerializer.Serialize(await _context.Products
                 .Include(e => e.Promotion)
                 .Where(e => e.ProductId == id)

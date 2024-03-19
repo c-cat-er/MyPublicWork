@@ -6,9 +6,9 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">首頁</a></li>
+              <li class="breadcrumb-item"><a :href="`${MVC_URL}`">首頁</a></li>
               <li class="breadcrumb-item">
-                <a href="#">購物車</a>
+                <router-link to="/cart">購物車</router-link>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 下單頁面
@@ -35,20 +35,63 @@
     <div class="container">
       <div class="row gutter-4 justify-content-between">
         <div class="col-lg-8">
+          <!-- 會員資訊 -->
+          <div class="row align-items-end mb-2">
+            <div class="col-md-6">
+              <h2 class="h3 mb-0">
+                <span class="text-muted">01.</span> 會員資訊
+              </h2>
+            </div>
+          </div>
+          <div class="row gutter-1 mb-6">
+            <div class="form-group col-md-12">
+              <label for="memberName">會員姓名</label>
+              <input
+                type="text"
+                class="form-control"
+                id="memberName"
+                readonly
+                :value="storeNav.memberInfo.name"
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="memberPhone">會員電話</label>
+              <input
+                type="text"
+                class="form-control"
+                id="memberPhone"
+                readonly
+                :value="storeNav.memberInfo.phone"
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="memberEmail">會員信箱</label>
+              <input
+                type="text"
+                class="form-control"
+                id="memberEmail"
+                readonly
+                :value="storeNav.memberInfo.email"
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="memberAddress">會員信箱</label>
+              <input
+                type="text"
+                class="form-control"
+                id="memberAddress"
+                readonly
+                :value="storeNav.memberInfo.address"
+              />
+            </div>
+          </div>
+
           <!-- delivery -->
           <div class="row align-items-end mb-2">
             <div class="col-md-6">
               <h2 class="h3 mb-0">
-                <span class="text-muted">01.</span> 寄送資訊
+                <span class="text-muted">02.</span> 寄送資訊
               </h2>
-            </div>
-            <div class="col-md-6 text-md-right">
-              <a
-                class="eyebrow unedrline action"
-                data-toggle="modal"
-                data-target="#addresses"
-                >我的資訊</a
-              >
             </div>
           </div>
           <div class="row gutter-1 mb-6">
@@ -96,13 +139,26 @@
                 placeholder="請輸入地址"
               />
             </div>
+            <div class="form-group col-md-12">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="useMemberInfoCheckbox"
+                  v-model="useMemberInfo"
+                />
+                <label class="form-check-label" for="useMemberInfoCheckbox">
+                  同會員資料
+                </label>
+              </div>
+            </div>
           </div>
 
           <!-- 寄送方式 -->
           <div class="row align-items-end mb-2">
             <div class="col-md-6">
               <h2 class="h3 mb-0">
-                <span class="text-muted">02.</span> 寄送方式
+                <span class="text-muted">03.</span> 寄送方式
               </h2>
             </div>
           </div>
@@ -148,73 +204,33 @@
                     <div class="col">
                       <h3 class="fs-18 mb-0">購物車</h3>
                     </div>
-                    <div class="col text-right">
-                      <a href="#" class="underline eyebrow">Edit</a>
-                    </div>
                   </div>
                 </div>
                 <div class="card-body">
                   <ul class="list-group list-group-line">
                     <li
-                      v-for="item in cartItems"
+                      v-for="item in storeCart.selectedItems"
                       :key="item.cartId"
-                      class="list-group-item d-flex justify-content-between text-dark align-items-center"
+                      class="list-group-item d-flex justify-content text-dark align-items-center"
                     >
-                      {{ item.name }} x {{ item.quantity }}
-                      <span>$ {{ item.price * item.quantity }}</span>
+                      <img
+                        style="width: 70px"
+                        :src="`${IMG_URL}/${item.imageFile}/${item.imageFileName}`"
+                        alt=""
+                        class="mr-3"
+                      />
+                      {{ item.name }}
+                      <br />
+                      單價：{{ item.price }}
+                      <br />
+                      數量：{{ item.quantity }}
+                      <br />
+                      小計：$ {{ item.price * item.quantity }}
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-
-            <!-- 會員資訊 -->
-            <!-- <div
-              class="modal sidebar fade"
-              id="addresses"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="addressesLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="addressesLabel">我的資訊</h5>
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="row gutter-3">
-                      <div class="col-12">
-                        <div class="custom-control custom-choice">
-                          <input
-                            type="radio"
-                            name="choiceRadio"
-                            class="custom-control-input"
-                            id="customChoice1"
-                          />
-                          <label
-                            class="custom-control-label text-dark"
-                            for="customChoice1"
-                          >
-                            姓名：{{ memberInfo.name }} <br />
-                            地址：{{ memberInfo.address }}
-                          </label>
-                          <span class="choice-indicator"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
 
             <!-- order summary -->
             <div class="col-12 mt-1">
@@ -232,7 +248,7 @@
                       class="list-group-item d-flex justify-content-between align-items-center"
                     >
                       小計
-                      <span> {{ totalPrice }}</span>
+                      <span> {{ storeCart.getTotalPriceOfSelectedItems }}</span>
                     </li>
                     <li
                       class="list-group-item d-flex justify-content-between align-items-center"
@@ -254,7 +270,10 @@
                       class="list-group-item d-flex justify-content-between align-items-center text-dark fs-18"
                     >
                       總計
-                      <span>{{ shipping.deliveryCost + totalPrice }}</span>
+                      <span>{{
+                        shipping.deliveryCost +
+                        storeCart.getTotalPriceOfSelectedItems
+                      }}</span>
                     </li>
                   </ul>
                 </div>
@@ -267,7 +286,7 @@
                 @click="placeOrder"
                 href="#!"
                 class="btn btn-primary btn-lg btn-block"
-                >前往付款</a
+                >下單</a
               >
             </div>
           </div>
@@ -278,19 +297,23 @@
 </template>
 <script>
 const API_URL = import.meta.env.VITE_API_URL;
+import { useCartStore, useNavbarStore } from "../store";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
+      MVC_URL: import.meta.env.VITE_MVC_URL,
+      IMG_URL: import.meta.env.VITE_IMAGE_URL,
       recipientName: "",
       recipientAddress: "",
       billRecipientName: "",
       billRecipientAddress: "",
+      useMemberInfo: false,
       shippingMethods: [],
       selectedShippingMethod: null,
-      cartItems: [],
-      memberInfo: [],
-      totalPrice: 0,
       shipping: {},
+      storeNav: useNavbarStore(),
+      storeCart: useCartStore(),
     };
   },
   methods: {
@@ -302,13 +325,12 @@ export default {
 
         if (response.ok) {
           const data = await response.json();
-
+          console.log(data);
           this.shippingMethods = data;
           // 給預設值
           this.selectedShippingMethod = data[0].shippingId;
           //更新 shipping 變數
           this.shipping = data[0];
-          // console.log(data);
         } else {
           console.error("Failed to fetch shipping methods");
         }
@@ -316,37 +338,6 @@ export default {
         console.error(err);
       }
     },
-
-    async fetchCartItems() {
-      try {
-        //memberId 要改登入會員id
-        const memberId = 1;
-        const response = await fetch(`${API_URL}/Carts/${memberId}`);
-        const data = await response.json();
-
-        this.cartItems = data;
-        this.totalPrice = data.reduce(
-          (accumulator, item) => accumulator + item.price * item.quantity,
-          0
-        );
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    },
-
-    async fetchMemberInfo() {
-      try {
-        const memberId = 1;
-        const response = await fetch(`${API_URL}/Members/${memberId}`);
-        const data = await response.json();
-        console.log(data);
-        this.memberInfo = data;
-      } catch (error) {
-        console.log("Error fetching memberInfo", error);
-      }
-    },
-
     //提交訂單
     async placeOrder() {
       try {
@@ -369,10 +360,9 @@ export default {
         //要發送的資料
         var orderData = {
           orderId: 0,
-          memberId: 1,
+          memberId: this.storeNav.memberId,
           paymentStatusId: 1,
           paymentId: 1,
-          promoCodeId: 1,
           shippingId: this.selectedShippingMethod,
           recipientName: this.recipientName,
           recipientAddress: this.recipientAddress,
@@ -381,7 +371,7 @@ export default {
           shippingStatusId: 1,
           creationTime: DateTime.toISOString(),
           completionTime: null,
-          orderStatusId: 1,
+          orderStatusId: 2,
         };
 
         const response = await fetch(`${API_URL}/Orders`, {
@@ -395,29 +385,25 @@ export default {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          alert("訂單提交成功");
-          await this.submitOrderDetails(data.orderId, data.memberId);
+          await this.submitOrderDetails(data);
         } else {
-          alert("訂單提交失敗");
         }
       } catch (error) {
-        alert("訂單提交失敗：" + error.message);
-        console.error("訂單提交失敗", error);
+        console.error("訂單提交失敗", error.message);
       }
     },
-
-    async submitOrderDetails(orderId, memberId) {
+    async submitOrderDetails(data) {
       const orderDetailsData = [];
-      for (const item of this.cartItems) {
+      for (const item of this.storeCart.selectedItems) {
         const detail = {
-          orderId: orderId,
+          orderId: data.orderId,
           productId: item.productId || null,
           inspirationId: item.inspirationId || null,
           customizedId: item.customizedId || null,
           quantity: item.quantity,
           unitPrice: item.price,
         };
-        console.log("OrderDetail JSON data:", detail);
+        //console.log("OrderDetail JSON data:", detail);
         orderDetailsData.push(detail);
       }
 
@@ -428,29 +414,25 @@ export default {
           "content-type": "application/json",
         },
       });
-
       if (detailsResponse.ok) {
-        console.log("OrderDetails 建立成功");
-        //建立成功 刪除購物車所有內容
-        await this.clearCarts(memberId);
+        await this.storeCart.deletePurchasedProduct();
+        this.storeCart.fetchCartItems(this.storeNav.memberId);
+        Swal.fire({
+          title: "訂單建立成功",
+          icon: "success",
+          showDenyButton: true,
+          confirmButtonText: "繼續購物",
+          denyButtonText: `檢視訂單`,
+          denyButtonColor: "#3085d6",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push("/product_listing");
+          } else if (result.isDenied) {
+            this.$router.push("/profile_order");
+          }
+        });
       } else {
-        const detailsErrorMessage = await detailsResponse.text();
-        console.log("OrderDetails 建立失敗：" + detailsErrorMessage);
         //如果details 建立失敗，要刪除前面建立的訂單
-      }
-    },
-
-    async clearCarts(memberId) {
-      const clearResponse = await fetch(`${API_URL}/Carts/Clear${memberId}`, {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-      if (clearResponse.ok) {
-        console.log("購物車清空成功");
-      } else {
-        console.log("購物車清空失敗");
       }
     },
   },
@@ -464,11 +446,27 @@ export default {
         this.shipping = selectedShipping;
       }
     },
+    useMemberInfo: function (newVal) {
+      if (newVal) {
+        // 如果复选框被选中，则将会员信息带入到收件人姓名与地址中
+        this.recipientName = this.storeNav.memberInfo.name;
+        this.recipientAddress = this.storeNav.memberInfo.address;
+        this.billRecipientName = this.storeNav.memberInfo.name;
+        this.billRecipientAddress = this.storeNav.memberInfo.address;
+      } else {
+        // 如果复选框未被选中，则清空收件人姓名与地址
+        this.recipientName = "";
+        this.recipientAddress = "";
+        this.billRecipientName = "";
+        this.billRecipientAddress = "";
+      }
+    },
   },
   mounted() {
+    //this.storeNav.getMemberIdFromCookie();
     this.fetchShippingMethods();
-    this.fetchCartItems();
-    this.fetchMemberInfo();
+    //this.storeCart.fetchCartItems(this.storeNav.memberId);
+    //this.storeNav.fetchMemberInfo();
   },
   components: {},
 };

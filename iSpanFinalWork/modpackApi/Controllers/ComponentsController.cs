@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -327,6 +328,10 @@ namespace modpackApi.Controllers
                 }
                 _context.Components.Remove(component);
                 await _context.SaveChangesAsync();
+                string content = component.ImageFileName;
+                HttpClient client = new HttpClient();
+                string imageUrl = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build().GetSection("imageUrl").Value;
+                HttpResponseMessage response = await client.PutAsync($"{imageUrl}/Components/imageDelete", new StringContent(content, Encoding.UTF8, "text/plain"));
             }
             catch (DbUpdateException ex)
             {

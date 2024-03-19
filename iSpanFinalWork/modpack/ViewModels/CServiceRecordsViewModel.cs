@@ -7,10 +7,6 @@ namespace modpack.ViewModels
     {
         public CServiceRecordsViewModel() { }
 
-        //public CServiceRecords(int id) { }
-
-        public int? CurrentAdminID { get; set; }
-
         [DisplayName("序")]
         public int aRecordID { get; set; }
 
@@ -40,11 +36,5 @@ namespace modpack.ViewModels
 
         [DisplayName("是否已解決")]
         public bool aIsResolved { get; set; }
-
-        // 登入管理員信息
-        public Administrator LoggedInAdmin { get; set; }
-
-        // 當前時間
-        public DateTime CurrentTime { get; set; }
     }
 }

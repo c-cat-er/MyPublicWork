@@ -1,5 +1,8 @@
-﻿@model IEnumerable<modpack.ViewModels.CServiceRecordsViewModel>
-
+﻿@model IEnumerable<modpack.Models.ServiceRecord>
+@{
+    var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+    var buildUrl = configuration.GetSection("BackUrl").Value;
+}
 <h1>回覆</h1>
 <p><a asp-action="List">回到列表</a></p>
 <hr />
@@ -10,297 +13,199 @@
             @* <span>Chat</span> *@
         </div>
         <div class="name">
-            <h3>@ViewData["CurrentMemberId"]</h3>
-            <p>@ViewData["CurrentMemberName"]</p>
+            <h5>會員ID：<span id="currentMemberId">@ViewData["CurrentMemberId"]</span></h5>
+            <p>姓名：<span id="currentMemberName">@ViewData["CurrentMemberName"]</span></p>
         </div>
         <div class="profile">
-            <img src="" alt="" class="icon" />
+            <img src="/images/admin/mac.jpeg" alt="" class="icon" />
+            <div>
+                <h6>管理者ID：<span id="currentAdminId">@ViewData["CurrentAdminId"]</span></h6>
+                <p>姓名：@ViewData["CurrentAdminName"]</p>
+            </div>
         </div>
     </div>
-
-    <div class="chat-mid">
-        @* <div class="chat">
-        <div class="chatbox left">
-        <div class="profile">
-        <img src="" alt="" class="icon" />
-        </div>
-        <div class="message">
-        <p>(提問)</p>
-        </div>
-        </div>
-        </div>
-        <div class="chat">
-        <div class="chatbox right">
-        <div class="profile">
-        <img src="" alt="" class="icon" />
-        </div>
-        <div class="message">
-        <p>(回復)</p>
-        </div>
-        </div>
-        </div> *@
-
+    <div class="chat-mid" id="chatWindow">
         @foreach (var item in Model)
         {
             <div class="chat">
                 <div class="chatbox left">
                     <div class="profile">
-                        <img src="" alt="" class="icon" />
+                        <img src="/images/admin/em1.jpeg" alt="User" class="icon" />
                     </div>
                     <div class="message-right">
                         <div class="message">
-                            <p>@item.aQuestionContent</p>
+                            <p>@item.Question</p>
                         </div>
-                        <span class="time">@item.aQuestionTime</span>
+                        <span class="time">@item.QuestionTime</span>
                     </div>
                 </div>
             </div>
-            <div class="chat">
-                <div class="chatbox right">
-                    <div class="profile">
-                        <img src="" alt="" class="icon" />
-                    </div>
-                    <div class="message-right">
-                        <div class="message">
-                            <p>@item.aAnswerContent</p>
+            @if (!string.IsNullOrEmpty(item.Answer))
+            {
+                <div class="chat" id="chatRight">
+                    <div class="chatbox right">
+                        <div class="profile">
+                            @*<img src="/images/admin/mac.jpeg" alt="" class="icon" />*@
                         </div>
-                        <span class="time">@item.aAnswerTime</span>
+                        <div class="message-right">
+                            <div class="message">
+                                <p>@item.Answer</p>
+                            </div>
+                            <span class="time">@item.AnswerTime</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
-
     <div class="inputbox chat-bottom">
-        <form>
+            <form id="form">
             <div class="input-container">
-                <textarea name="message" placeholder="..."></textarea>
+                <textarea name="message" id="message" placeholder="..."></textarea>
                 <span>+</span>
             </div>
             <div class="button-container">
                 <button class="btn btn-info clearBtn" type="button">清除內容</button>
-                <button class="btn btn-info submitBtn" type="submit">送出</button>
+                <button class="btn btn-primary submitBtn" type="button">送出回覆</button>
             </div>
         </form>
     </div>
 </div>
-
 @section Styles {
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100vh;
-            background: #f48f8b;
-        }
-
-        .icon {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .serviceRoom {
-            width: 500px;
-            margin: 30px auto 0;
-            background: rgba(255, 255, 255, 0.85);
-            display: flex;
-            flex-direction: column;
-            padding: 0 0 30px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 6px 2px rgba(43, 43, 43, 0.5);
-        }
-
-            .serviceRoom .chat-top {
-                background: #f2f2f2;
-                padding-top: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-
-                .serviceRoom .chat-top .name h3 {
-                    letter-spacing: 0.15rem;
-                    font-weight: 400;
-                    font-size: 1rem;
-                }
-
-                .serviceRoom .chat-top .control span {
-                    color: #72a3d4;
-                    cursor: pointer;
-                }
-
-
-                .serviceRoom .chat-top .control:hover span,
-                .serviceRoom .chat-top .control:hover span::before {
-                    color: #31356c;
-                }
-
-                .serviceRoom .chat-top .profile img {
-                    margin: auto;
-                }
-
-            .serviceRoom .chat-mid {
-                padding: 20px 20px 50px;
-                background-image: url();
-                background-color: lightgoldenrodyellow;
-                height: 100%;
-            }
-
-                .serviceRoom .chat-mid .chat {
-                    display: grid;
-                    grid-template-columns: 50px 360px 50px;
-                }
-
-                    .serviceRoom .chat-mid .chat .chatbox {
-                        display: flex;
-                        align-items: center;
-                        position: relative;
-                    }
-
-
-                        .serviceRoom .chat-mid .chat .chatbox .message-right .message {
-                            padding: 1px 10px;
-                            border-radius: 25px;
-                            background: white;
-                            position: relative;
-                            box-shadow: 1px 2px 3px 1px rgba(43, 43, 43, 0.3);
-                        }
-
-                            .serviceRoom .chat-mid .chat .chatbox .message-right .message::before {
-                                content: '';
-                                position: absolute;
-                                width: 10px;
-                                height: 2px;
-                            }
-
-                    .serviceRoom .chat-mid .chat .left {
-                        grid-column: 1/3;
-                    }
-
-                        .serviceRoom .chat-mid .chat .left .message-right .message {
-                            margin-left: 10px;
-                            border-left-color: transparent;
-                        }
-
-                            .serviceRoom .chat-mid .chat .left .message-right .message::before {
-                                top: 50%;
-                                left: -12px;
-                                transform: translateY(-50%);
-                                border: 7px solid transparent;
-                                border-right-color: white;
-                            }
-
-                        .serviceRoom .chat-mid .chat .left .message-right .time {
-                            display: block;
-                            float: left;
-                            clear: both;
-                            margin-top: 5px; /* 调整上下边距 */
-                            margin-left: 5px; /* 调整左边距 */
-                        }
-
-                    .serviceRoom .chat-mid .chat .right {
-                        grid-column: 2/-1;
-                        justify-self: end;
-                    }
-
-                        .serviceRoom .chat-mid .chat .right .profile {
-                            order: 2;
-                        }
-
-                        .serviceRoom .chat-mid .chat .right .message-right .message {
-                            margin-right: 10px;
-                            border-right-color: transparent;
-                        }
-
-                            .serviceRoom .chat-mid .chat .right .message-right .message::before {
-                                top: 50%;
-                                right: -12px;
-                                transform: translateY(-50%);
-                                border: 7px solid transparent;
-                                border-left-color: white;
-                            }
-
-
-            .serviceRoom .chat-bottom {
-                padding: 20px 20px 0px;
-                background-color: darkgray;
-            }
-
-                .serviceRoom .chat-bottom form {
-                    display: flex;
-                    align-items: flex-start; /* 讓內容向上對齊 */
-                }
-
-                    .serviceRoom .chat-bottom form .input-container {
-                        display: flex;
-                        align-items: center; /* 讓內容垂直居中 */
-                        margin-right: 10px; /* 確保左側輸入框和加號之間有一定的間距 */
-                    }
-
-                        .serviceRoom .chat-bottom form .input-container textarea {
-                            outline: none;
-                            border: 1px solid transparent;
-                            border-bottom-color: #e2e2e2;
-                            padding: 0 15px;
-                            height: 100%; /* 設置輸入框高度與右側按鈕組相同 */
-                        }
-
-                        .serviceRoom .chat-bottom form .input-container span {
-                            background: rgba(226, 226, 226, 0.9);
-                            padding: 5px 10px;
-                            border-radius: 50%;
-                            cursor: pointer;
-                        }
-
-                    .serviceRoom .chat-bottom form .button-container {
-                        display: flex;
-                        flex-direction: column; /* 將按鈕組垂直排列 */
-                        align-items: flex-start; /* 將按鈕組左對齊 */
-                    }
-
-                        .serviceRoom .chat-bottom form .button-container button {
-                            margin-top: 10px; /* 確保按鈕之間有一定的間距 */
-                        }
-    </style>
+    <link rel="stylesheet" href="~/css/ReplyTwo2.css" />
 }
-
 @section Scripts {
-    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.5/signalr.min.js"></script>
     <script>
-        // .clearBtn 清空内容
         document.querySelector('.clearBtn').addEventListener('click', function () {
             document.getElementById('message').value = '';
         });
+        document.querySelector('.submitBtn').addEventListener('click', function () {
+            var message = document.getElementById('message').value.trim();
+            if (message !== '') {
+                sendAdminReply();
+            } else {
+                console.log('請輸入消息');
+            }
+        });
 
-        // 监听 DisplayQuestion 事件，并将收到的问题显示在界面上。
-        var connection = new signalR.HubConnectionBuilder().withUrl("/service/serviceHub").build();
+        const connection = new signalR.HubConnectionBuilder().withUrl("@buildUrl/serviceRecordsHub")
+            .build();
         connection.start().then(function () {
             console.log("SignalR 連接已建立");
         }).catch(function (err) {
-            return console.error(err.toString());
+            console.error(err.toString());
+        });
+        function addHours(date, hours) {
+            return new Date(date.getTime() + hours * 60 * 60 * 1000);
+        }
+
+        function sendAdminReply() {
+            var currentMemberId = parseInt(document.getElementById("currentMemberId").textContent);
+            var currentAdminId = parseInt(document.getElementById("currentAdminId").textContent);
+            var answer = document.getElementById('message').value.toString();
+            var answerTime = new Date();
+            var adjustedTime = addHours(answerTime, 8);
+            var requestData = {
+                MemberId: currentMemberId,
+                AdminId: currentAdminId,
+                Answer: answer,
+                AnswerTime: adjustedTime.toISOString(),
+                IsResolved: false
+            };
+
+            connection.invoke("SendAdminMessage", requestData)
+                .then(function () {
+                    console.log("回覆發送成功");
+                    document.getElementById('message').value = '';
+                })
+                .catch(function (err) {
+                    console.error("發送回覆出錯: " + err.toString());
+                });
+        }
+
+        function formatDateTime(dateTimeString) {
+            var dateTime = new Date(dateTimeString);
+            var options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,
+                hourCycle: 'h12',
+                timeZone: 'Asia/Shanghai'
+            };
+            return dateTime.toLocaleString('zh-CN', options);
+        }
+
+        connection.on("QuestionReceived", function (memberId, question, currentDateTime) {
+            appendMessageToChatWindow(memberId, question, currentDateTime);
         });
 
-        connection.on("DisplayQuestion", function (questionData) {
-            // 在后台客服界面上显示会员 ID 内容和时间
-            // 假设你有一个用于显示问题的元素，例如 <div id="question-container"></div>
-            var questionContainer = document.getElementById("question-container");
-            var questionHtml = "<p>會員ID: " + questionData.memberId + "</p>";
-            questionHtml += "<p>問題內容: " + questionData.questionContent + "</p>";
-            questionHtml += "<p>問題時間: " + questionData.questionTime + "</p>";
+        function appendMessageToChatWindow(memberId, question, currentDateTime) {
+            var chatWindow = document.getElementById("chatWindow");
+            var chatBox = document.createElement('div');
+            chatBox.classList.add('chat');
+            chatBox.classList.add('chatbox', 'left');
+            var profile = document.createElement('div');
+            profile.classList.add('profile');
+            var img = document.createElement('img');
+            img.src = "/images/admin/em1.jpeg";
+            img.alt = "Member";
+            img.classList.add('icon');
+            profile.appendChild(img);
+            var messageLeft = document.createElement('div');
+            messageLeft.classList.add('message-left');
+            var message = document.createElement('div');
+            message.classList.add('message');
+            message.innerHTML = "</strong> " + question;
+            var timeSpan = document.createElement('span');
+            timeSpan.classList.add('time');
+            timeSpan.innerHTML = formatDateTime(currentDateTime);
+            messageLeft.appendChild(message);
+            messageLeft.appendChild(timeSpan);
+            chatBox.appendChild(profile);
+            chatBox.appendChild(messageLeft);
+            chatWindow.appendChild(chatBox);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            message.classList.add('left-message-style');
+        }
 
-            // 将问题内容添加到问题容器中
-            questionContainer.innerHTML = questionHtml;
+        connection.on("AdminReplyReceived", function (adminId, answer, currentAdminDateTime) {
+            appendAdminReplyToChatWindow(adminId, answer, currentAdminDateTime);
         });
+
+        function appendAdminReplyToChatWindow(adminId, answer, currentAdminDateTime) {
+            var chatWindow = document.getElementById("chatWindow");
+            var chatBox = document.createElement('div');
+            chatBox.classList.add('chat');
+            chatBox.classList.add('chatbox', 'right');
+
+            var messageContainerRight = document.createElement('div');
+            messageContainerRight.classList.add('message-container-right');
+            messageContainerRight.classList.add('right-container');
+            var message = document.createElement('div');
+            message.classList.add('message');
+            message.innerHTML = answer;
+            var timeSpan = document.createElement('span');
+            timeSpan.classList.add('time');
+            timeSpan.classList.add('right-time');
+            timeSpan.innerHTML = formatDateTime(currentAdminDateTime);
+            var profile = document.createElement('div');
+            profile.classList.add('profile');
+            var img = document.createElement('img');
+            //img.classList.add('icon');
+            //profile.appendChild(img);
+            messageContainerRight.appendChild(message);
+            messageContainerRight.appendChild(profile);
+            messageContainerRight.appendChild(timeSpan);
+            message.classList.add('right-message-style');
+            profile.style.order = '1';
+            chatBox.appendChild(messageContainerRight);
+            chatWindow.appendChild(chatBox);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
     </script>
-}   @*這是後端專案的view*@
+}

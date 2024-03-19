@@ -1,8 +1,4 @@
 ﻿@model modpack.ViewModels.CImageCarouselViewModel
-@{
-    ViewData["Title"] = "Edit";
-}
-
 <h1>輪播管理</h1>
 <h4>修改</h4>
 <hr />
@@ -30,11 +26,9 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="List">回到列表</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

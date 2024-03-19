@@ -1,12 +1,8 @@
-﻿using System;
-using System.Text.Json;
-using Humanizer;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.Elfie.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using modpack.DTO;
 using modpack.Models;
 using modpack.ViewModels;
 
@@ -15,13 +11,11 @@ namespace modpack.Controllers
     public class AdminUserController : Controller
     {
         private readonly ModPackContext _context;
-        private readonly ILogger<AdminUserController> _logger;
         private IWebHostEnvironment _environment;
 
-        public AdminUserController(ModPackContext context, ILogger<AdminUserController> logger, IWebHostEnvironment environment)
+        public AdminUserController(ModPackContext context, IWebHostEnvironment environment)
         {
             _context = context;
-            _logger = logger;
             _environment = environment;
         }
 
@@ -32,8 +26,7 @@ namespace modpack.Controllers
                 string adminUser = HttpContext.Session.GetString(CDictionary.SK_LOGINED_ADMIN);
                 Administrator admin = JsonSerializer.Deserialize<Administrator>(adminUser);
                 int AdminID = admin.AdministratorId;
-
-                var aVM = _context.Administrators
+                var aVM = await _context.Administrators
                      .Where(a => a.AdministratorId == AdminID)
                      .Select(a => new CAdminViewModel
                      {
@@ -46,27 +39,26 @@ namespace modpack.Controllers
                          AdminAccount = a.Account,
                          AdminPassword = a.Password,
                      })
-                     .FirstOrDefault();
+                    .FirstOrDefaultAsync();
                 return View(aVM);
             }
-            return RedirectToAction("Login");
+            return RedirectToAction("Login2");
         }
 
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login2()
         {
             ViewData["Layout"] = null;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(CLoginViewModel vm)
+        public async Task<IActionResult> Login2(CLoginViewModel vm)
         {
             if (vm.txtAccount != null && vm.txtPassword != null)
             {
-                Administrator adminUser = _context.Administrators.FirstOrDefault(
+                Administrator adminUser = await _context.Administrators.FirstOrDefaultAsync(
                     t => t.Account.Trim().Equals(vm.txtAccount.Trim()) &&
                         t.Password.Trim().Equals(vm.txtPassword.Trim()));
-               
                 if (adminUser != null)
                 {// 查有此人 登入成功.
                     string json = JsonSerializer.Serialize(adminUser);
@@ -92,7 +84,7 @@ namespace modpack.Controllers
         public async Task<IActionResult> Logout()
         {
             HttpContext.Session.Remove(CDictionary.SK_LOGINED_ADMIN);
-            return RedirectToAction("Login");
+            return RedirectToAction("Login2");
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -100,7 +92,6 @@ namespace modpack.Controllers
             string adminUser = HttpContext.Session.GetString(CDictionary.SK_LOGINED_ADMIN);
             Administrator ad = JsonSerializer.Deserialize<Administrator>(adminUser);
             int AdminID = ad.AdministratorId;
-
             var am = await _context.Administrators.FindAsync(AdminID);
             if (am != null)
             {
@@ -109,12 +100,12 @@ namespace modpack.Controllers
                     .Select(at => at.Name)
                     .FirstOrDefault();
                 ViewData["TitleId"] = new SelectList(_context.AdministratorTitles, "TitleId", "Name", am.TitleId);
-
                 var vm = new CAdminViewModel
                 {
                     AdminID = am.AdministratorId,
                     AdminTitleID = am.TitleId,
                     //TitleName = am.Title.Name,
+                    //aPermissions = am.Title.Permissions,
                     AdminName = am.Name,
                     aAdminCode = am.AdminCode,
                     AdminImage = am.Image,
@@ -123,7 +114,7 @@ namespace modpack.Controllers
                 };
                 return View(vm);
             }
-            return RedirectToAction("List");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -133,7 +124,6 @@ namespace modpack.Controllers
             string adminUser = HttpContext.Session.GetString(CDictionary.SK_LOGINED_ADMIN);
             Administrator admin = JsonSerializer.Deserialize<Administrator>(adminUser);
             int AdminID = admin.AdministratorId;
-
             Administrator aEdit = await _context.Administrators.FindAsync(AdminID);
             if (aEdit != null)
             {
@@ -161,81 +151,6 @@ namespace modpack.Controllers
         private bool AdministratorExists(int id)
         {
             return _context.Administrators.Any(e => e.AdministratorId == id);
-        }
-
-        // GET: AdminUser/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var administrator = await _context.Administrators
-                .Include(a => a.Title)
-                .FirstOrDefaultAsync(m => m.AdministratorId == id);
-            if (administrator == null)
-            {
-                return NotFound();
-            }
-
-            return View(administrator);
-        }
-
-        // GET: AdminUser/Create
-        public IActionResult Create()
-        {
-            ViewData["TitleId"] = new SelectList(_context.AdministratorTitles, "TitleId", "Name");
-            return View();
-        }
-
-        // POST: AdminUser/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdministratorId,TitleId,Name,Account,Password,Modifier,ModificationTime")] Administrator administrator)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(administrator);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["TitleId"] = new SelectList(_context.AdministratorTitles, "TitleId", "Name", administrator.TitleId);
-            return View(administrator);
-        }
-
-        // GET: AdminUser/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var administrator = await _context.Administrators
-                .Include(a => a.Title)
-                .FirstOrDefaultAsync(m => m.AdministratorId == id);
-            if (administrator == null)
-            {
-                return NotFound();
-            }
-
-            return View(administrator);
-        }
-
-        // POST: AdminUser/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var administrator = await _context.Administrators.FindAsync(id);
-            if (administrator != null)
-            {
-                _context.Administrators.Remove(administrator);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
     }
 }

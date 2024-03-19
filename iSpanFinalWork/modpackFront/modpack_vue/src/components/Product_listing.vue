@@ -6,9 +6,9 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">主頁</a></li>
+              <li class="breadcrumb-item"><a :href="`${MVC_URL}`">主頁</a></li>
               <li class="breadcrumb-item active" aria-current="page">
-                所有商品
+                精選商品
               </li>
             </ol>
           </nav>
@@ -23,7 +23,7 @@
         <div class="col-lg-9">
           <div class="row gutter-2 align-items-end">
             <div class="col-md-6">
-              <h1 class="mb-0">所有商品</h1>
+              <h1 class="mb-0">精選商品</h1>
               <span class="eyebrow">{{ products.length }} products</span>
             </div>
             <div class="col-md-6 text-md-right">
@@ -69,6 +69,43 @@
       <div class="row gutter-4">
         <!-- sidebar -->
         <aside class="col-lg-3 sidebar">
+          <!-- 搜尋框 -->
+          <!-- <div class="widget">
+            <span
+              class="widget-collapse d-lg-none"
+              data-toggle="collapse"
+              data-target="#collapse-search"
+              aria-expanded="false"
+              aria-controls="collapse-search"
+              role="button"
+            >
+              搜尋
+            </span>
+            <div class="d-lg-block collapse" id="collapse-search">
+              <span class="widget-title">搜尋</span>
+              <div class="widget-content"> -->
+          <!-- 搜尋表單 -->
+          <!-- <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="輸入關鍵字"
+                    v-model="searchText"
+                    @input="fetchFilteredProducts"
+                  />
+                </div> -->
+          <!-- 下拉菜单 -->
+          <!-- <ul v-if="filteredProducts.length > 0" class="dropdown-menu">
+                  <li
+                    v-for="product in filteredProducts"
+                    :key="product.ProductId"
+                  >
+                    {{ product.Name }}
+                  </li>
+                </ul> 
+              </div>
+            </div>
+          </div> -->
           <!-- 品牌 -->
           <div class="widget">
             <span
@@ -147,85 +184,6 @@
               </div>
             </div>
           </div>
-          <!-- 功能 -->
-          <div class="widget">
-            <span
-              class="widget-collapse d-lg-none"
-              data-toggle="collapse"
-              data-target="#collapse-function"
-              aria-expanded="false"
-              aria-controls="collapse-function"
-              role="button"
-            >
-              按功能篩選
-            </span>
-            <div class="d-lg-block collapse" id="collapse-function">
-              <span class="widget-title">功能</span>
-              <div class="widget-content">
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="customCheckFunction1"
-                    v-model="selectedFunctions"
-                    value="多功能"
-                  />
-                  <label class="custom-control-label" for="customCheckFunction1"
-                    >多功能</label
-                  >
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="customCheckFunction2"
-                    v-model="selectedFunctions"
-                    value="旅行"
-                  />
-                  <label class="custom-control-label" for="customCheckFunction2"
-                    >旅行</label
-                  >
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="customCheckFunction3"
-                    v-model="selectedFunctions"
-                    value="休閒"
-                  />
-                  <label class="custom-control-label" for="customCheckFunction3"
-                    >休閒</label
-                  >
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="customCheckFunction4"
-                    v-model="selectedFunctions"
-                    value="登山"
-                  />
-                  <label class="custom-control-label" for="customCheckFunction4"
-                    >登山</label
-                  >
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="customCheckFunction5"
-                    v-model="selectedFunctions"
-                    value="商務"
-                  />
-                  <label class="custom-control-label" for="customCheckFunction5"
-                    >商務</label
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- 類別 -->
           <div class="widget">
             <span
@@ -292,7 +250,6 @@
               </div>
             </div>
           </div>
-
           <!-- 價格 -->
           <div class="widget">
             <span
@@ -350,7 +307,6 @@
                       >
                     </span>
                   </div>
-                  <a href="#!" class="product-like"></a>
                 </div>
               </div>
             </div>
@@ -359,11 +315,25 @@
             <div class="col">
               <nav class="d-inline-block">
                 <!-- pagination -->
-                <Pagination
-                  :currentPage="currentPage"
-                  :totalPages="totalPages"
-                  @setCurrentPage="setCurrentPage"
-                />
+                <div class="row">
+                  <div class="col">
+                    <ul class="pagination">
+                      <li
+                        v-for="page in totalPages"
+                        :key="page"
+                        class="page-item"
+                        :class="{ active: page === currentPage }"
+                      >
+                        <a
+                          class="page-link"
+                          href="#"
+                          @click.prevent="setCurrentPage(page)"
+                          >{{ page }}</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </nav>
             </div>
           </div>
@@ -374,11 +344,11 @@
 </template>
 <script>
 const API_URL = import.meta.env.VITE_API_URL;
-import Pagination from "./Pagination.vue";
 import Slider from "@vueform/slider";
+import Swal from "sweetalert2";
+import { useCartStore, useNavbarStore } from "../store";
 export default {
   components: {
-    Pagination,
     Slider,
   },
   data() {
@@ -392,15 +362,13 @@ export default {
       selectedFunctions: [],
       selectedCategory: [],
       sortOption: "default",
-      // priceRange: {
-      //   min: 1000,
-      //   max: 9000,
-      // },
       value: [0, 10000],
       format: {
         prefix: "$",
         decimals: 2,
       },
+      storeCart: useCartStore(),
+      storeNav: useNavbarStore(),
     };
   },
   methods: {
@@ -418,29 +386,52 @@ export default {
         } else {
           console.log("Failed to fetch products");
         }
-      } catch (err) {
-        //console.log(err);
-      }
+      } catch (err) {}
     },
     async addProductToCart(product) {
       try {
-        const response = await fetch(`${API_URL}/Carts`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            //之後要改會員id
-            memberId: 1,
-            quantity: 1,
-            productId: product.ProductId,
-          }),
-        });
-        if (response.ok) {
-          const result = await response.text();
-          alert("成功加入購物車", result);
+        const existingCartItem = this.storeCart.cartItems.find(
+          (item) => item.productId === product.ProductId
+        );
+        if (existingCartItem) {
+          const response = await fetch(
+            `${API_URL}/Carts/${existingCartItem.cartId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                cartId: existingCartItem.cartId,
+                quantity: existingCartItem.quantity + 1,
+                imageFileName: existingCartItem.imageFileName,
+              }),
+            }
+          );
+          if (response.ok) {
+            Swal.fire("修改數量成功");
+            this.storeCart.fetchCartItems(this.storeNav.memberId);
+          } else {
+            Swal.fire("修改數量失敗");
+          }
         } else {
-          alert("加入購物車失敗");
+          const response = await fetch(`${API_URL}/Carts`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              memberId: this.storeNav.memberId,
+              quantity: 1,
+              productId: product.ProductId,
+            }),
+          });
+          if (response.ok) {
+            this.storeCart.fetchCartItems(this.storeNav.memberId);
+            Swal.fire("成功加入購物車");
+          } else {
+            Swal.fire("加入購物車失敗");
+          }
         }
       } catch (error) {
         console.log(error);
@@ -452,9 +443,6 @@ export default {
     setCurrentPage(page) {
       this.currentPage = page;
     },
-  },
-  mounted() {
-    this.fetchProducts();
   },
   computed: {
     totalPages() {
@@ -472,16 +460,8 @@ export default {
         );
       });
 
-      //篩選功能
-      const filteredByFunctions = filteredByBrands.filter((product) => {
-        return (
-          this.selectedFunctions.length === 0 ||
-          this.selectedFunctions.some((func) => product.Name.includes(func))
-        );
-      });
-
       //篩選類別
-      const filteredByCategory = filteredByFunctions.filter((product) => {
+      const filteredByCategory = filteredByBrands.filter((product) => {
         return (
           this.selectedCategory.length === 0 ||
           this.selectedCategory.includes(product.Category)
@@ -509,6 +489,10 @@ export default {
 
       return sortedProducts.slice(startIndex, endIndex);
     },
+  },
+  mounted() {
+    //this.storeNav.getMemberIdFromCookie();
+    this.fetchProducts();
   },
 };
 </script>

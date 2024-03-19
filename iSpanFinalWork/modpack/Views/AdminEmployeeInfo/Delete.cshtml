@@ -1,14 +1,7 @@
 ﻿@model modpack.Models.Administrator
-
-@{
-    ViewData["Title"] = "Delete";
-}
-
-<h1>部門管理 (測試用)</h1>
-
+<h1>部門管理</h1>
 <h3>確定要刪除此人員資料?</h3>
 <div>
-    <h4>Administrator</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -36,7 +29,6 @@
             @Html.DisplayFor(model => model.Password)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="AdministratorId" />
         <input type="submit" value="確認刪除" class="btn btn-danger" /> |

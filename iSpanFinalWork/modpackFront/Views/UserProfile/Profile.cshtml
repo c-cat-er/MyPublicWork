@@ -1,11 +1,12 @@
 ﻿@model modpackFront.Models.Member
 
-@{
-    ViewData["Title"] = "會員資料檢視";
+@functions {
+    public string ActivePage(string actionName)
+    {
+        return (ViewBag.ActionName == actionName) ? "active" : "";
+    }
 }
 
-<!doctype html>
-<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
@@ -22,7 +23,7 @@
 </head>
 <body>
     <!-- 會員資料標題 -->
-    <section class="hero hero-small bg-gray text-white">
+    <section class="hero hero-small bg-purple text-white">
         <div class="container">
             <div class="row gutter-2 gutter-md-4 align-items-end">
                 <div class="col-md-6 text-center text-md-left">
@@ -30,9 +31,11 @@
                     <span class="text-muted">@Html.DisplayFor(model => model.Level.Name)</span>
                 </div>
                 <!-- 會員編輯btn -->
-                <div class="col-md-6 text-center text-md-right">
+                @* <div class="col-md-6 text-center text-md-right">
                     <a asp-action="Edit" class="btn btn-sm btn-outline-white">編輯</a>
-                </div>
+                    <!-- 修改密碼btn -->
+                    <a asp-action="ChangePassword" class="btn btn-sm btn-outline-white">修改密碼</a>
+                </div> *@
             </div>
         </div>
     </section>
@@ -42,11 +45,12 @@
             <div class="row gutter-4 justify-content-between">
                 <aside class="col-lg-3">
                     <div class="nav nav-pills flex-column lavalamp" id="sidebar-1" role="tablist">
-                        <a class="nav-link active" data-toggle="tab" href="#sidebar-1-1" role="tab" aria-controls="sidebar-1" aria-selected="true">基本資料</a>
-                        <a class="nav-link" data-toggle="tab" href="#sidebar-1-2" role="tab" aria-controls="sidebar-1-2" aria-selected="false">訂單</a>
-                        <a class="nav-link" data-toggle="tab" href="#sidebar-1-5" role="tab" aria-controls="sidebar-1-5" aria-selected="false">收藏</a>
+                        <a class="nav-link @ActivePage("Profile")" asp-controller="UserProfile" asp-action="Profile" aria-controls="sidebar-1-1" aria-selected="@(ViewBag.ActionName == "Profile" ? "true" : "false")">基本資料</a>
+                        <a class="nav-link @ActivePage("Edit")" asp-controller="UserProfile" asp-action="Edit" aria-controls="sidebar-1-2" aria-selected="@(ViewBag.ActionName == "Edit" ? "true" : "false")">編輯基本資料</a>
+                        <a class="nav-link @ActivePage("ChangePassword")" asp-controller="UserProfile" asp-action="ChangePassword" aria-controls="sidebar-1-5" aria-selected="@(ViewBag.ActionName == "ChangePassword" ? "true" : "false")">修改會員密碼</a>
                     </div>
                 </aside>
+
 
                 <div class="col-lg-9">
 

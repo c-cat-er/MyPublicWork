@@ -4,10 +4,7 @@
     <div class="container">
       <div class="row gutter-2 gutter-md-4 align-items-end">
         <div class="col-md-6 text-center text-md-left">
-          <h1 class="mb-0">HI, 會員名稱</h1>
-        </div>
-        <div class="col-md-6 text-center text-md-right">
-          <a href="#!" class="btn btn-sm btn-outline-white">編輯</a>
+          <h1 class="mb-0">{{ storeNav.memberInfo.name }} 的訂單</h1>
         </div>
       </div>
     </div>
@@ -16,46 +13,6 @@
   <section class="pt-5">
     <div class="container">
       <div class="row gutter-4 justify-content-between">
-        <!-- sidebar -->
-        <aside class="col-lg-3">
-          <div
-            class="nav nav-pills flex-column lavalamp"
-            id="sidebar-1"
-            role="tablist"
-          >
-            <a
-              class="nav-link active"
-              data-toggle="tab"
-              :href="`${MVC_URL}/UserProfile/Profile`"
-              href="#sidebar-1-1"
-              role="tab"
-              aria-controls="sidebar-1-1"
-              aria-selected="false"
-              >基本資料</a
-            >
-
-            <a
-              class="nav-link active"
-              data-toggle="tab"
-              href="#sidebar-1-2"
-              role="tab"
-              aria-controls="sidebar-1-2"
-              aria-selected="true"
-              >訂單</a
-            >
-            <a
-              class="nav-link"
-              data-toggle="tab"
-              href="#sidebar-1-5"
-              role="tab"
-              aria-controls="sidebar-1-5"
-              aria-selected="false"
-              >收藏</a
-            >
-          </div>
-        </aside>
-        <!-- / sidebar -->
-
         <!-- content -->
         <div class="col-lg-9">
           <div class="row">
@@ -114,10 +71,11 @@
                                   :title="detail.name"
                                   data-toggle="tooltip"
                                   data-placement="top"
+                                  style="color: black"
                                 >
                                   <img
                                     :src="`${IMG_URL}/${detail.imageFile}/${detail.imageFileName}`"
-                                    alt="image"
+                                    alt="image" /><br
                                 /></a>
                               </li>
                             </ul>
@@ -146,6 +104,15 @@
                                   >寄送資訊</a
                                 >
                               </li>
+                              <li class="nav-item">
+                                <a
+                                  class="nav-link"
+                                  id="orderProductDetails-tab"
+                                  data-toggle="tab"
+                                  href="#orderProductDetails"
+                                  >產品明細</a
+                                >
+                              </li>
                             </ul>
 
                             <div class="tab-content">
@@ -155,21 +122,51 @@
                               >
                                 <ul class="order-details">
                                   <li>
-                                    <strong>訂購總額：</strong>
+                                    <strong>付款狀態：</strong
+                                    >{{ order.paymentStatusName }}
+                                  </li>
+                                  <li>
+                                    <strong>付款方式：</strong
+                                    >{{ order.paymentName }}
+                                  </li>
+                                  <hr />
+                                  <li>
+                                    <strong>產品總額：</strong>
                                     {{ calculateTotalPrice(order.orderId) }}元
                                   </li>
                                   <li>
-                                    <strong>付款方式：</strong>
-                                    {{ order.paymentName }}
+                                    <strong>運費：</strong>
+                                    {{ order.shippingCost }}元
                                   </li>
                                   <li>
-                                    <strong>付款狀態：</strong
-                                    >{{ order.paymentStatusName }}
+                                    <strong>總計：</strong
+                                    >{{
+                                      calculateTotalPrice(order.orderId) +
+                                      order.shippingCost
+                                    }}元
                                   </li>
                                 </ul>
                               </div>
                               <div class="tab-pane fade" id="shippingDetails">
                                 <ul class="order-details">
+                                  <li>
+                                    <strong>出貨狀態：</strong>
+                                    {{ order.shippingStatusName }}
+                                  </li>
+                                  <hr />
+                                  <li>
+                                    <strong>會員姓名：</strong>
+                                    {{ storeNav.memberInfo.name }}
+                                  </li>
+                                  <li>
+                                    <strong>會員信箱：</strong>
+                                    {{ storeNav.memberInfo.email }}
+                                  </li>
+                                  <li>
+                                    <strong>會員電話：</strong>
+                                    {{ storeNav.memberInfo.phone }}
+                                  </li>
+                                  <hr />
                                   <li>
                                     <strong>收件人姓名：</strong>
                                     {{ order.recipientName }}
@@ -188,6 +185,34 @@
                                   </li>
                                 </ul>
                               </div>
+                              <div
+                                class="tab-pane fade"
+                                id="orderProductDetails"
+                              >
+                                <ul
+                                  class="order-details"
+                                  v-if="orderDetails[order.orderId]"
+                                  v-for="detail in orderDetails[order.orderId]"
+                                  :key="detail.detailsId"
+                                >
+                                  <li>
+                                    <strong>訂購產品：</strong>
+                                    {{ detail.name }}
+                                  </li>
+                                  <li>
+                                    <strong>產品單價：</strong>
+                                    {{ detail.unitPrice }}
+                                  </li>
+                                  <li>
+                                    <strong>訂購數量：</strong>
+                                    {{ detail.quantity }}
+                                  </li>
+                                  <li>
+                                    <strong>小計：</strong>
+                                    {{ detail.subtotal }}
+                                  </li>
+                                </ul>
+                              </div>
                             </div>
 
                             <button
@@ -202,11 +227,25 @@
                     </div>
                   </div>
                   <!-- pagination -->
-                  <Pagination
-                    :currentPage="currentPage"
-                    :totalPages="totalPages"
-                    @setCurrentPage="setCurrentPage"
-                  />
+                  <div class="row">
+                    <div class="col">
+                      <ul class="pagination">
+                        <li
+                          v-for="page in totalPages"
+                          :key="page"
+                          class="page-item"
+                          :class="{ active: page === currentPage }"
+                        >
+                          <a
+                            class="page-link"
+                            href="#"
+                            @click.prevent="setCurrentPage(page)"
+                            >{{ page }}</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -220,12 +259,9 @@
 </template>
 <script>
 const API_URL = import.meta.env.VITE_API_URL;
-var baseAddress = "http://localhost:7250";
-import Pagination from "./Pagination.vue";
+import { useCartStore, useNavbarStore } from "../store";
 export default {
-  components: {
-    Pagination,
-  },
+  components: {},
   data() {
     return {
       MVC_URL: import.meta.env.VITE_MVC_URL,
@@ -235,13 +271,16 @@ export default {
       ordersPerPage: 10,
       currentPage: 1,
       selectedOrderId: null,
+      storeCart: useCartStore(),
+      storeNav: useNavbarStore(),
     };
   },
   methods: {
     async fetchOrders() {
       try {
-        const memberId = 1;
-        const response = await fetch(`${API_URL}/Orders/${memberId}`);
+        const response = await fetch(
+          `${API_URL}/Orders/${this.storeNav.memberId}`
+        );
         const data = await response.json();
         console.log(data);
         this.orders = data;
@@ -254,6 +293,7 @@ export default {
         console.error("error fetching orders", error);
       }
     },
+
     async fetchOrderDetail(orderId) {
       try {
         const response = await fetch(`${API_URL}/OrderDetails/${orderId}`);
@@ -261,7 +301,7 @@ export default {
         console.log(data);
         this.orderDetails[orderId] = data;
       } catch (error) {
-        console.error("error fetching order details", error);
+        console.error(error);
       }
     },
     setCurrentPage(page) {
@@ -294,7 +334,10 @@ export default {
     },
   },
   mounted() {
+    //this.storeNav.getMemberIdFromCookie();
     this.fetchOrders();
+    //this.storeNav.fetchMemberInfo();
+    this.storeCart.fetchShippingMethods();
   },
 };
 </script>

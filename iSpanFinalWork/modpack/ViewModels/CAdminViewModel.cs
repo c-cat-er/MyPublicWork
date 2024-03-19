@@ -27,13 +27,11 @@ namespace modpack.ViewModels
         public IFormFile photo { get; set; }
 
         [DisplayName("帳號")]
-        //[Required(ErrorMessage = "帳號不可為空")]
         [MaxLength(10)]
         [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "帳號錯誤(只能包含英文字母和數字)")]
         public string AdminAccount { get; set; }
 
         [DisplayName("密碼")]
-        //[Required(ErrorMessage = "密碼不可為空")]
         [MaxLength(10)]
         [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "密碼錯誤(只能包含英文字母和數字)")]
         public string AdminPassword { get; set; }

@@ -1,4 +1,20 @@
 <template>
+  <!-- breadcrumbs -->
+  <section class="breadcrumbs separator-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a :href="`${MVC_URL}`">首頁</a></li>
+              <li class="breadcrumb-item active">購物車</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- hero -->
   <section class="hero">
     <div class="container">
@@ -31,10 +47,21 @@
       <div class="row">
         <div class="col cart-item-list cart-item-list-minimal">
           <!-- cart item -->
-          <div class="cart-item" v-for="item in cartItems" :key="item.cartId">
+          <div
+            class="cart-item"
+            v-for="item in storeCart.cartItems"
+            :key="item.cartId"
+          >
             <div class="row align-items-center">
               <div class="col-12 col-lg-6">
                 <div class="media media-product">
+                  <!-- 選擇框 -->
+                  <input
+                    type="checkbox"
+                    class="cart-item-checkbox"
+                    @change="toggleSelection(item)"
+                    :checked="item.selected"
+                  />
                   <a href="#!"
                     ><img
                       :src="`${IMG_URL}/${item.imageFile}/${item.imageFileName}`"
@@ -89,7 +116,7 @@
         <div class="col-md-6 col-lg-4">
           <div class="inline-block">
             <span class="eyebrow">總計</span>
-            <h4 class="h2">{{ totalPrice }}</h4>
+            <h4 class="h2">{{ storeCart.getTotalPriceOfSelectedItems }}</h4>
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -109,7 +136,7 @@
           <router-link
             to="/checkout"
             class="btn btn-lg btn-primary btn-block mt-1"
-            >下單</router-link
+            >前往下單</router-link
           >
         </div>
       </div>
@@ -118,48 +145,20 @@
 </template>
 <script>
 const API_URL = import.meta.env.VITE_API_URL;
+import { useCartStore, useNavbarStore } from "../store";
 export default {
   data() {
     return {
       MVC_URL: import.meta.env.VITE_MVC_URL,
       IMG_URL: import.meta.env.VITE_IMAGE_URL,
-      cartItems: [],
-      totalPrice: 0,
+      storeCart: useCartStore(),
+      storeNav: useNavbarStore(),
     };
   },
   methods: {
-    async fetchCartItems() {
-      try {
-        //memberId 要改登入會員id
-        const memberId = 1;
-        const response = await fetch(`${API_URL}/Carts/${memberId}`);
-        const data = await response.json();
-        console.log(data);
-        this.cartItems = data;
-        this.updateTotalPrice();
-        //console.log(data);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    },
     async deleteProduct(item) {
-      try {
-        const response = await fetch(`${API_URL}/Carts/${item.cartId}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          this.fetchCartItems();
-          alert("產品成功移除購物車");
-        } else {
-          console.error("Error deleting product:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error deleting product:", error);
-      }
+      await this.storeCart.deleteProduct(item);
+      this.storeCart.fetchCartItems(this.storeNav.memberId);
     },
     incQuantity(item) {
       if (item.quantity < 10) {
@@ -175,18 +174,15 @@ export default {
         this.updateCartQuantity(item);
       }
     },
-    updateQuantity(item) {
-      item.quantity = parseInt(item.quantity);
-      this.updateCartQuantity(item);
+    async toggleSelection(item) {
+      if (item.selected) {
+        item.selected = false;
+        this.storeCart.removeFromSelectedItems(item);
+      } else {
+        item.selected = true;
+        this.storeCart.addToSelectedItems(item);
+      }
     },
-
-    updateTotalPrice() {
-      this.totalPrice = this.cartItems.reduce(
-        (accumulator, item) => accumulator + item.price * item.quantity,
-        0
-      );
-    },
-
     async updateCartQuantity(item) {
       try {
         const response = await fetch(`${API_URL}/Carts/${item.cartId}`, {
@@ -202,18 +198,19 @@ export default {
         });
         const result = await response.text();
         if (response.ok) {
-          this.updateTotalPrice();
-          console.log("Update quantity successful:", result);
+          console.log(result);
         } else {
-          console.log("Error updating quantity:", result);
+          console.log(result);
         }
       } catch (error) {
-        console.error("Error updating quantity:", error);
+        console.error(error);
       }
     },
   },
   mounted() {
-    this.fetchCartItems();
+    //this.storeNav.getMemberIdFromCookie();
+    //this.storeNav.fetchMemberInfo();
+    //this.storeCart.fetchCartItems(this.storeNav.memberId);
   },
 };
 </script>

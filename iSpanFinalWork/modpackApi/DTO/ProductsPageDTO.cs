@@ -13,6 +13,7 @@ namespace modpackApi.DTO
         public string ImageFileName { get; set; }
         public float SalePrice { get; set; }
         public List<int> Customizedid { get; set; }
+        public List<string> CustomizedName { get; set; }
         public List<float> CustomizedSalePrice { get; set; }
         public List<string> CustomizedImageFileName { get; set; }
         public List<int> relatedproductsId { get; set; }

@@ -10,7 +10,8 @@ using System;
 using modpackFront.DTO;
 using modpackFront.Models;
 using modpackFront.ViewModels;
-using Microsoft.AspNetCore.Mvc.Rendering; // 引入 ViewModel
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages; // 引入 ViewModel
 
 namespace modpackFront.Controllers
 {
@@ -32,7 +33,7 @@ namespace modpackFront.Controllers
                 return RedirectToAction("Index", "Home");
             }
             else { return View("LoginRegister"); }
-                
+
         }
 
         [HttpPost]
@@ -189,6 +190,108 @@ namespace modpackFront.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(LoginRegisterViewModel model)
+        {
+
+            // 檢查帳號和信箱是否匹配
+            var user = await _context.Members.FirstOrDefaultAsync(u => u.Account == model.Account && u.Email == model.Email);
+            if (user != null)
+            {
+                // 生成令牌和儲存邏輯
+                var token = "2386";/*new Random().Next(1000, 9999).ToString();*/
+
+                var passwordReset = new PasswordReset
+                {
+                    UserId = user.MemberId,
+                    Token = token,
+                    ExpiryDate = DateTime.UtcNow.AddMinutes(5)
+                };
+
+                _context.PasswordResets.Add(passwordReset);
+                await _context.SaveChangesAsync();
+                // 發送郵件邏輯
+
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+
+            // 可以選擇是否顯示錯誤信息，或是直接導航到確認頁面避免洩露用戶信息
+            ModelState.AddModelError(string.Empty, "提供的信息不匹配任何帳戶，或錯誤操作。");
+
+
+            return View("LoginRegister", model);
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPasswordConfirmation(string token)
+        {
+            var passwordReset = await _context.PasswordResets
+                .FirstOrDefaultAsync(pr => pr.Token == token && pr.ExpiryDate >= DateTime.UtcNow);
+
+            if (passwordReset != null)
+            {
+                // 令牌有效，導航到重設密碼頁面
+                return RedirectToAction("ResetPassword", new { token = token });
+            }
+            else
+            {
+                // 令牌無效或過期
+                ModelState.AddModelError(string.Empty, "無效或過期的驗證碼。");
+                return View("ForgotPasswordConfirmation");
+            }
+        }
+
+        [HttpGet]
+
+        public IActionResult ResetPassword(string token)
+        {
+
+            var model = new ResetPasswordViewModel
+            {
+                Token = token
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+
+            var passwordReset = await _context.PasswordResets
+            .FirstOrDefaultAsync(pr => pr.Token == model.Token && pr.ExpiryDate >= DateTime.UtcNow);
+
+            if (passwordReset != null)
+            {
+                var user = await _context.Members.FindAsync(passwordReset.UserId);
+                if (user != null)
+                {
+                    if (model.NewPassword == model.ConfirmPassword)
+                    {
+                        // 更新用戶密碼
+                        user.Password = model.NewPassword;
+                        _context.Update(user);
+                        await _context.SaveChangesAsync();
+
+                        // 刪除令牌或使其失效
+                        _context.PasswordResets.Remove(passwordReset);
+                        await _context.SaveChangesAsync();
+
+                        return RedirectToAction("Login");
+                    }
+
+                }
+            }
+            // 處理錯誤情況
+            return View(model);
+        }
 
     }
 }

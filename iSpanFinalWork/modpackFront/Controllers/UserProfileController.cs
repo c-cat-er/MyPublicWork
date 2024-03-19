@@ -41,6 +41,9 @@ namespace modpackFront.Controllers
                 return NotFound();
             }
 
+            ViewBag.ControllerName = "UserProfile";
+            ViewBag.ActionName = "Profile";
+
             return View(member);
         }
 
@@ -77,6 +80,9 @@ namespace modpackFront.Controllers
                 ModificationTime = member.ModificationTime,
             };
 
+            ViewBag.ControllerName = "UserProfile";
+            ViewBag.ActionName = "Edit";
+
             return View(memberDto);
         }
         [HttpPost]
@@ -87,9 +93,7 @@ namespace modpackFront.Controllers
             {
                 return NotFound();
             }
-
-            //if (ModelState.IsValid)
-            //{
+           
             var member = await _context.Members.FirstOrDefaultAsync(m => m.MemberId == memberDto.id);
             if (member == null)
             {
@@ -144,11 +148,101 @@ namespace modpackFront.Controllers
                     throw;
                 }
             }
-            //}
-
+            
         }
 
+        // 顯示修改密碼表單
+        public async Task<IActionResult> ChangePassword()
+        {
+            var memberIdString = User.FindFirst(ClaimTypes.Sid)?.Value;
+            if (!int.TryParse(memberIdString, out int memberId))
+            {
+                return NotFound();
+            }
 
+            var member = await _context.Members
+                .Include(m => m.Level)
+                .Where(m => m.MemberId == memberId).FirstOrDefaultAsync();
+
+            if (member == null)
+            {
+                return NotFound();
+            }
+
+            var CPDto = new ChangePasswordDTO
+            {
+                Id = member.MemberId,               
+                Name = member.Name,                
+                LevelName = member.Level.Name,
+            };
+
+            ViewBag.ControllerName = "UserProfile";
+            ViewBag.ActionName = "ChangePassword";
+
+            return View(CPDto);
+        }
+
+        // 處理修改密碼請求
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO CPDto)
+        {
+            if (CPDto == null)
+            {
+                return NotFound();
+            }
+
+            var member = await _context.Members.FirstOrDefaultAsync(m => m.MemberId == CPDto.Id);
+            if (member == null)
+            {
+                return NotFound();
+            }
+
+            // 模擬的驗證當前密碼的邏輯
+            var isValidCurrentPassword = VerifyPassword(CPDto.CurrentPassword, member.Password);
+            if (!isValidCurrentPassword)
+            {
+                // 如果當前密碼不正確，向用戶顯示錯誤訊息
+                ModelState.AddModelError("CurrentPassword", "當前密碼不正確。");
+                return View(CPDto);
+            }
+
+            // 更新密碼        
+            member.Password = CPDto.NewPassword;
+            await _context.SaveChangesAsync();
+
+            // 處理密碼修改後的邏輯，比如重定向到登錄頁面或顯示成功消息
+            return RedirectToAction("Logout","Authentication");
+        }
+
+        private bool VerifyPassword(string currentPassword, string password)
+        {
+            return currentPassword == password;
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> VerifyCurrentPassword([FromBody] PasswordVerificationModel model)
+        //{
+        //    var memberIdString = User.FindFirst(ClaimTypes.Sid)?.Value;
+        //    if (!int.TryParse(memberIdString, out int memberId))
+        //    {
+        //        return Json(new { isValid = false });
+        //    }
+
+        //    var member = await _context.Members.FirstOrDefaultAsync(m => m.MemberId == memberId);
+        //    if (member == null)
+        //    {
+        //        return Json(new { isValid = false });
+        //    }
+
+        //    var isValid = VerifyPassword(model.CurrentPassword, member.Password);
+        //    return Json(new { isValid = isValid });
+        //}
+
+        //public class PasswordVerificationModel
+        //{
+        //    public string CurrentPassword { get; set; }
+        //}
         private bool MemberExists(int id)
         {
             return _context.Members.Any(e => e.MemberId == id);

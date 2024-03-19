@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "PrivacyPolicy";
+    var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+    var buildUrl = configuration.GetSection("BackUrl").Value;
 }
 
 
@@ -11,21 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文繞圖</title>
-    <style>
-        body {
-            background-color: #E0E0E0;
-        }
-
-        .article {
-            /* border: 1px solid gray; */
-            width: 60%;
-            margin: 10px auto;
-            padding: 30px 80px;
-            background-color: #fff;
-            border-radius: 15px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="~/css/FooterStyle.css">
 </head>
 
 <body>
@@ -34,7 +22,7 @@
     <article class="article">
        
         <figure>
-            <img class="img1" src="~/images/3DShop/Privacy.png" alt="">
+            <img class="img1" src="@buildUrl/images/3DShop/Privacy.jpg" alt="">
 
             <h1 class="t1">隱私權政策</h1>
             <br />

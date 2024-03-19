@@ -23,7 +23,6 @@ namespace modpack.ViewModels
         public string aMember { get; set; }
 
         [DisplayName("商品編號")]
-        //public int? aProductID { get; set; }
         public int? aProductID { get; set; }
 
         [DisplayName("商品名")]
@@ -44,30 +43,27 @@ namespace modpack.ViewModels
         [DisplayName("優惠碼")]
         public string? aPromoCode { get; set; }
 
-        [DisplayName("購物金額(NT$ ~)")]
+        [DisplayName("購物金額(NT$)")]
         public int? aShoppingCredit { get; set; }
 
         [DisplayName("運費編號")]
         public int? aShippingID { get; set; }
 
-        [DisplayName("運費(NT$ ~)")]
+        [DisplayName("運費(NT$)")]
         public decimal? aShippingFee { get; set; }
 
         [DisplayName("完成付款日")]
         public DateTime? aCompletionTime { get; set; }
 
-        [DisplayName("總支付價(NT$ ~)")]
+        [DisplayName("總支付價(NT$)")]
         public decimal? aTotalPrice { get; set; }
 
-
-        // 年-月
         public string aYearMonth { get; set; }
 
         // chartjs - bar
         public string aProductCategory { get; set; }
         public int? aInspirationID { get; set; }
         public int? aCustomizedID { get; set; }
-
 
         public List<string> aLabels { get; set; }
 

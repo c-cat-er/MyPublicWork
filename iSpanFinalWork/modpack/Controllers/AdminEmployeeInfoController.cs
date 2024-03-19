@@ -10,7 +10,6 @@ using modpack.Models;
 using modpack.ViewModels;
 using System.Text.Json;
 using X.PagedList;
-using X.PagedList.Mvc;
 
 namespace modpack.Controllers
 {
@@ -26,15 +25,15 @@ namespace modpack.Controllers
         }
 
         // GET: AdminEmployeeInfo
-        public async Task<IActionResult> List(CKeywordViewModel vm, string searchStringTitle, string searchStringName, string sortOrder, int page = 1, int pageSize = 10)
+        public async Task<IActionResult> List(CKeywordViewModel vm, string searchStringTitle,
+            string searchStringName, string sortOrder, int page = 1, int pageSize = 10)
         {
             string adminUser = HttpContext.Session.GetString(CDictionary.SK_LOGINED_ADMIN);
             Administrator admin = JsonSerializer.Deserialize<Administrator>(json: adminUser);
             int adminTitleId = admin.TitleId;
 
-            List<CAdminViewModel> list = await _context.Administrators
-               .Where(a => string.IsNullOrEmpty(vm.txtKeyWord) || a.Name.Contains(vm.txtKeyWord))
-               .Where(a => a.TitleId == adminTitleId || a.Title.Permissions > _context.AdministratorTitles
+            IQueryable<CAdminViewModel> list = _context.Administrators
+               .Where(a => a.TitleId == adminTitleId || a.Title.Permissions >= _context.AdministratorTitles
                    .Where(at => at.TitleId == adminTitleId)
                    .Select(at => at.Permissions)
                    .FirstOrDefault())
@@ -47,36 +46,37 @@ namespace modpack.Controllers
                    AdminName = a.Name,
                    aAdminCode = a.AdminCode,
                    AdminImage = a.Image,
-                   AdminAccount = a.Account
-               })
-               .ToListAsync();
+                   AdminAccount = a.Account,
+                   AdminPassword = a.Password,
+               });
 
+            if (!string.IsNullOrEmpty(searchStringTitle))
+                list = list.Where(a => a.TitleName.Contains(searchStringTitle));
+            if (!string.IsNullOrEmpty(searchStringName))
+                list = list.Where(a => a.AdminName.Contains(searchStringName));
             if (string.IsNullOrEmpty(sortOrder))
-            {
                 sortOrder = "AdminID";
-            }
-
             switch (sortOrder)
             {
                 case "aPermission_desc":
-                    list = list.OrderByDescending(a => a.aPermissions).ToList();
+                    list = list.OrderByDescending(a => a.aPermissions);
                     break;
                 case "aPermission_asc":
-                    list = list.OrderBy(a => a.aPermissions).ToList();
+                    list = list.OrderBy(a => a.aPermissions);
                     break;
                 case "aAdminCode_desc":
-                    list = list.OrderByDescending(a => a.aAdminCode).ToList();
+                    list = list.OrderByDescending(a => a.aAdminCode);
                     break;
                 case "aAdminCode_asc":
-                    list = list.OrderBy(a => a.aAdminCode).ToList();
+                    list = list.OrderBy(a => a.aAdminCode);
                     break;
                 default:
-                    list = list.OrderBy(a => a.AdminID).ToList();
+                    list = list.OrderBy(a => a.AdminID);
                     break;
             }
-
             HttpContext.Session.SetString(CDictionary.SK_LOGINED_ADMIN, JsonSerializer.Serialize(admin));
-            var result = list.ToPagedList(page, pageSize);
+            var result = await list.ToPagedListAsync(page, pageSize);
+            ViewBag.NoSearchResults = result.Count == 0;
             return View(result);
         }
 
@@ -111,7 +111,6 @@ namespace modpack.Controllers
                 Account = avm.AdminAccount,
                 Password = avm.AdminPassword
             };
-
             _context.Add(ad);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
@@ -121,19 +120,12 @@ namespace modpack.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var ad = await _context.Administrators
               .Include(a => a.Title)
               .FirstOrDefaultAsync(a => a.AdministratorId == id);
-
             if (ad == null)
-            {
                 return NotFound();
-            }
-
             var viewModel = new CAdminViewModel
             {
                 AdminID = ad.AdministratorId,
@@ -182,18 +174,12 @@ namespace modpack.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var administrator = await _context.Administrators
                 .Include(a => a.Title)
                 .FirstOrDefaultAsync(m => m.AdministratorId == id);
             if (administrator == null)
-            {
                 return NotFound();
-            }
-
             return View(administrator);
         }
 
@@ -207,7 +193,6 @@ namespace modpack.Controllers
             {
                 _context.Administrators.Remove(administrator);
             }
-
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
@@ -221,18 +206,12 @@ namespace modpack.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var ad = await _context.Administrators
                 .Include(a => a.Title)
                 .FirstOrDefaultAsync(m => m.AdministratorId == id);
             if (ad == null)
-            {
                 return NotFound();
-            }
-
             return View(ad);
         }
     }

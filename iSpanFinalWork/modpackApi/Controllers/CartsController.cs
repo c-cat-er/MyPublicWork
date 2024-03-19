@@ -153,6 +153,22 @@ namespace modpackApi.Controllers
             return "產品清空成功";
         }
 
+        // POST: api/Carts/DeleteMultiple
+        [HttpDelete("deletePurchasedProduct")]
+        public async Task<string> deletePurchasedProduct(List<int> cartIds)
+        {
+            foreach (int cartId in cartIds)
+            {
+                var cart = await _context.Carts.FindAsync(cartId);
+                if (cart != null)
+                {
+                    _context.Carts.Remove(cart);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return "多个购物车项目删除成功";
+        }
+
         private bool CartExists(int id)
         {
             return _context.Carts.Any(e => e.CartId == id);

@@ -13,9 +13,9 @@ public partial class ServiceRecord
 
     public string Question { get; set; }
 
-    public DateTime? QuestionTime { get; set; }
+    public DateTime QuestionTime { get; set; }
 
-    public int? AdministratorId { get; set; }//1
+    public int? AdministratorId { get; set; }
 
     public string Answer { get; set; }
 

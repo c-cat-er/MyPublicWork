@@ -6,9 +6,9 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">主頁</a></li>
+              <li class="breadcrumb-item"><a :href="`${MVC_URL}`">主頁</a></li>
               <li class="breadcrumb-item active" aria-current="page">
-                客製化商品
+                客製化背包
               </li>
             </ol>
           </nav>
@@ -23,7 +23,7 @@
         <div class="col-lg-12">
           <div class="row gutter-2 align-items-end">
             <div class="col-md-6">
-              <h1 class="mb-0">客製化商品</h1>
+              <h1 class="mb-0">靈感商品</h1>
               <span class="eyebrow">{{ inspirations.length }} products</span>
             </div>
             <div class="col-md-6 text-md-right">
@@ -98,7 +98,6 @@
                       >
                     </span>
                   </div>
-                  <a href="#!" class="product-like"></a>
                 </div>
               </div>
             </div>
@@ -107,11 +106,25 @@
             <div class="col">
               <nav class="d-inline-block">
                 <!-- pagination -->
-                <Pagination
-                  :currentPage="currentPage"
-                  :totalPages="totalPages"
-                  @setCurrentPage="setCurrentPage"
-                />
+                <div class="row">
+                  <div class="col">
+                    <ul class="pagination">
+                      <li
+                        v-for="page in totalPages"
+                        :key="page"
+                        class="page-item"
+                        :class="{ active: page === currentPage }"
+                      >
+                        <a
+                          class="page-link"
+                          href="#"
+                          @click.prevent="setCurrentPage(page)"
+                          >{{ page }}</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </nav>
             </div>
           </div>
@@ -122,11 +135,10 @@
 </template>
 <script>
 const API_URL = import.meta.env.VITE_API_URL;
-import Pagination from "./Pagination.vue";
+import { useCartStore, useNavbarStore } from "../store";
+import Swal from "sweetalert2";
 export default {
-  components: {
-    Pagination,
-  },
+  components: {},
   data() {
     return {
       MVC_URL: import.meta.env.VITE_MVC_URL,
@@ -135,6 +147,8 @@ export default {
       inspirationsPerPage: 9,
       currentPage: 1,
       inspirations: [],
+      storeCart: useCartStore(),
+      storeNav: useNavbarStore(),
     };
   },
   methods: {
@@ -170,26 +184,21 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            //之後要改會員id
-            cartId: 0,
-            memberId: 1,
+            memberId: this.storeNav.memberId,
             quantity: 1,
             inspirationId: inspiration.InspirationId,
           }),
         });
         if (response.ok) {
-          const result = await response.text();
-          alert("成功加入購物車", result);
+          this.storeCart.fetchCartItems(this.storeNav.memberId);
+          Swal.fire("成功加入購物車");
         } else {
-          alert("加入購物車失敗");
+          Swal.fire("加入購物車失敗");
         }
       } catch (error) {
         console.log(error);
       }
     },
-  },
-  mounted() {
-    this.fetchInspirations();
   },
   computed: {
     totalPages() {
@@ -211,6 +220,10 @@ export default {
 
       return this.inspirations.slice(startIndex, endIndex);
     },
+  },
+  mounted() {
+    //this.storeNav.getMemberIdFromCookie();
+    this.fetchInspirations();
   },
 };
 </script>

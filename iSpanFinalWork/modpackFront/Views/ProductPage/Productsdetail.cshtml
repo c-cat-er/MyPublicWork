@@ -10,6 +10,11 @@
 </head>
 
 <body>
+    @{
+        var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+        var VueUrl = configuration.GetSection("VueUrl").Value;
+        var buildUrl = configuration.GetSection("BackUrl").Value;
+    }
     <!-- breadcrumbs -->
     <section class="breadcrumbs bg-light">
         <div class="container">
@@ -18,7 +23,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-                            <li class="breadcrumb-item"><a href="listing-sidebar.html">商品列表</a></li>
+                            <li class="breadcrumb-item"><a href="@VueUrl/Product_listing">精選商品</a></li>
                             <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
                         </ol>
                     </nav>
@@ -26,11 +31,6 @@
             </div>
         </div>
     </section>
-
-    @{
-        var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
-        var buildUrl = configuration.GetSection("BackUrl").Value;
-    }
     <!-- product -->
     <section class="hero bg-light pt-7">
         <div class="container">

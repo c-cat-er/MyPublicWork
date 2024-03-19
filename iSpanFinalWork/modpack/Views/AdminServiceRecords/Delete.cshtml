@@ -1,14 +1,7 @@
 ﻿@model modpack.Models.ServiceRecord
-
-@{
-    ViewData["Title"] = "Delete";
-}
-
 <h1>刪除</h1>
-
 <h3>確定要刪除嗎?</h3>
 <div>
-    <h4>ServiceRecord</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -54,10 +47,9 @@
             @Html.DisplayFor(model => model.Member.MemberId)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="RecordId" />
         <input type="submit" value="刪除" class="btn btn-danger" /> |
-        <a asp-action="Index">取消並返回</a>
+        <a asp-action="List">取消並返回</a>
     </form>
 </div>

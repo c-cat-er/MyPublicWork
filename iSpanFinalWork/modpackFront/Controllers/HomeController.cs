@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using modpackFront.DTO;
 using modpackFront.Models;
@@ -21,19 +22,18 @@ namespace modpackFront.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var imageCarousels = _context.ImageCarousels.ToList();
-            var product = _context.Products
+            var imageCarousels = await _context.ImageCarousels.ToListAsync();
+            var products = await _context.Products
                 .Include(p => p.Status)
                 .Include(p => p.Promotion)
-                .ToList();
+                .ToListAsync();
 
             var homeDTO = new HomeDTO
             {
                 ImageCarousel = imageCarousels,
-                Product = product,
+                Product = products,
             };
             ViewData["CustomerId"] = User.Identity.IsAuthenticated ? User.Identity.Name : "Guest";
-
             return View(homeDTO);
         }
 
@@ -43,10 +43,23 @@ namespace modpackFront.Controllers
             return View(imageCarousels);
         }
 
-        [HttpPost]
-        public IActionResult AddToFavorites(int? productId, int? InspirationId, int? CustomizedId)
+        public async Task<IActionResult> TestService()
         {
-            return View();
+            var userIdentity = HttpContext.User.Identity as ClaimsIdentity;
+            if (userIdentity == null || !userIdentity.IsAuthenticated)
+                return RedirectToAction("Login", "Authentication");
+
+            var memberIdClaim = userIdentity.FindFirst(ClaimTypes.Sid);
+            if (memberIdClaim == null || !int.TryParse(memberIdClaim.Value, out int memberId))
+                return RedirectToAction("Login", "Authentication");
+
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null)
+                return NotFound();
+            var serviceRecord = await _context.ServiceRecords.FirstOrDefaultAsync(sr => sr.MemberId == memberId);
+            ViewBag.MemberID = memberId;
+            ViewBag.MemberName = member.Name;
+            return View(serviceRecord);
         }
 
         public IActionResult Privacy()
@@ -81,13 +94,24 @@ namespace modpackFront.Controllers
 
         //------------------------------------------------------------------------------------------------------------
         [HttpPost]
-       
+
         public IActionResult Sendout(ServiceRecord record)
         {
+           
+            try
+            {
                 _context.ServiceRecords.Add(record);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
-            
+            }
+            catch (Exception)
+            {
+                //string errorMessage = "顯示錯誤";
+                //ViewBag["Error"] = errorMessage;
+
+                ViewData["Error"] = "非會員ID請重新輸入";
+            }
+            return View("ReachOut");
+
         }
 
         //-----------------------------------------------------------------------------------------------------------

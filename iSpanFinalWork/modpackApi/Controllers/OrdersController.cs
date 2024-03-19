@@ -58,6 +58,7 @@ namespace modpackApi.Controllers
                     memberId = order.MemberId,
                     memberName = order.Member.Name,
                     shippingName = order.Shipping.Description,
+                    shippingCost = order.Shipping.DeliveryCost,
                     shippingStatusName = order.ShippingStatus.Name,
                     paymentName = order.Payment.Description,
                     paymentStatusName = order.PaymentStatus.Name,

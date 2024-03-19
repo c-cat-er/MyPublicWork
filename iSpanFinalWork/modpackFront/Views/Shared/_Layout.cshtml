@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/vendor.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <!-- 設定網頁標題 -->
-    <title>@ViewData["Title"]Home - Minimal</title>
+    <title>ModPack</title>
     <style>
         
         <!-- 用於特定視圖 style -->
@@ -45,24 +45,31 @@
                             <!-- 精選商品選項 -->
                             <li class="nav-item">
                                  <!--<a asp-area="" asp-controller="Home" asp-action="FeaturedProducts" class="nav-link">精選商品</a> -->
-                                <a href="@VueUrl/product_listing" class="nav-link">精選商品</a>
+                               @if(User.Identity.IsAuthenticated==true)
+                                {
+                                    <a href="@VueUrl/product_listing/@User.Claims.FirstOrDefault().Value" class="nav-link">精選商品</a>
+                                }
+                                else{
+                                    <a href="@VueUrl/product_listing" class="nav-link">精選商品</a>
+                                }
+                              
                             </li>
-                            <!-- 限時優惠下拉選單 -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#!" id="navbarDropdown-13" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">限時優惠</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown-13">
-                                    <li>
-                                        <a asp-area="" asp-controller="Home" asp-action="DiscountedProducts" class="dropdown-item">9折商品</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="Home" asp-action="BackToSchoolDiscount" class="dropdown-item">開學特惠</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <!-- 客製化包包選項 -->
                             <li class="nav-item">
+                            @if(User.Identity.IsAuthenticated==true)
+                            {
+                                <a href="@VueUrl/Custom_listing/@User.Claims.FirstOrDefault().Value" class="nav-link">客製化背包</a>
+                            }else{
                                 <a href="@VueUrl/Custom_listing" class="nav-link">客製化背包</a>
+                            } 
+                               
                             </li>
+                            
+                            <li class="nav-item">
+                                 <a asp-action="TestService" asp-route-id="1" class="nav-link">客服</a>
+                            </li>
+       
                         </ul>
                     </div>
 
@@ -87,7 +94,6 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown-10">
                                         <li><a class="dropdown-item" asp-controller="UserProfile" asp-action="Profile">基本資料</a></li>
                                         <li><a href="@VueUrl/Profile_order" class="dropdown-item">訂單</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Account" asp-action="Wishlist">收藏</a></li>
                                     </ul>
                                 </li>
                                 }
@@ -95,10 +101,6 @@
                                 {
                                 <a asp-area="" asp-controller="Authentication" asp-action="Login" class="nav-link">登入</a>
                                 }
-                            </li>
-                            <!-- 搜尋按鈕 -->
-                            <li class="nav-item">
-                                <a data-toggle="modal" data-target="#search" class="nav-link"><i class="icon-search"></i></a>
                             </li>
                             <!-- 購物車按鈕 -->
                             <li class="nav-item cart">
@@ -208,20 +210,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 搜尋模態框 -->
-    <div class="modal fade search" id="search" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <input type="text" class="form-control" placeholder="我要搜尋..." aria-label="Type your search here" aria-describedby="button-addon2" />
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
             </div>
         </div>

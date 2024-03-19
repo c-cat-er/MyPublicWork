@@ -46,45 +46,18 @@
             </li>
             <!-- Nav Item - 員工-資料管理 Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapseAdminUser"
-                   aria-expanded="true"
-                   aria-controls="collapseAdminUser">
+                <a class="nav-link" asp-area="" asp-controller="AdminUser" asp-action="Index">
                     <i class="fas fa-fw fa-user"></i>
                     <span>當前管理者</span>
                 </a>
-                <div id="collapseAdminUser"
-                     class="collapse"
-                     aria-labelledby="headingAdminCurrent"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminUser" asp-action="Index">檢視</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapseAdminTitle"
-                   aria-expanded="true"
-                   aria-controls="collapseAdminTitle">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>部門管理</span>
-                </a>
-                <div id="collapseAdminTitle"
-                     class="collapse"
-                     aria-labelledby="headingAdminTitle"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminEmployeeInfo" asp-action="List">檢視</a>
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminEmployeeInfo" asp-action="Create">新增</a>
-                    </div>
-                </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="AdminEmployeeInfo" asp-action="List">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>職級管理</span>
+                </a>
+            </li>
             <!-- Divider -->
             <li>
                 <hr class="sidebar-divider" />
@@ -120,48 +93,10 @@
 
             <!-- Nav Item - 會員-訂單管理 Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapse訂單"
-                   aria-expanded="true"
-                   aria-controls="collapse訂單">
+                <a class="nav-link" asp-area="" asp-controller="Order" asp-action="List">
                     <i class="fas fa-fw fa-clipboard-list"></i>
                     <span>訂單管理</span>
                 </a>
-                <div id="collapse訂單"
-                     class="collapse"
-                     aria-labelledby="headingPages"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="Order" asp-action="List">檢視</a>
-                        @* <a class="text-dark collapse-item" asp-area="" asp-controller="*" asp-action="Revise">修改</a> *@
-                        @* <a class="text-dark collapse-item" asp-area="" asp-controller="*" asp-action="Create">新增</a> *@
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - 會員-購物金管理 Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapse購物金"
-                   aria-expanded="true"
-                   aria-controls="collapse購物金">
-                    <i class="fas fa-fw fa-dollar-sign"></i>
-                    <span>購物金管理</span>
-                </a>
-                <div id="collapse購物金"
-                     class="collapse"
-                     aria-labelledby="headingPages"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="Product" asp-action="Index">修改產品</a>
-                        @* <a class="text-dark collapse-item" asp-area="" asp-controller="*" asp-action="Revise">修改</a>
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="*" asp-action="Create">新增</a> *@
-                    </div>
-                </div>
             </li>
 
             <!-- Divider -->
@@ -175,6 +110,35 @@
             <li>
                 <div class="sidebar-heading">產品</div>
             </li>
+            <!-- Nav Item - 產品-產品管理 Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>產品管理</span>
+                </a>
+            </li>
+
+            @* <li class="nav-item">
+                <a class="nav-link collapsed"
+                   href="#"
+                   data-toggle="collapse"
+                   data-target="#collapse產品"
+                   aria-expanded="true"
+                   aria-controls="collapse產品">
+                    <i class="fas fa-fw fa-box-open"></i>
+                    <span>產品管理</span>
+                </a>
+                <div id="collapse產品"
+                     class="collapse"
+                     aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="text-dark collapse-item" asp-area="" asp-controller="Products" asp-action="List">檢視</a>
+                        <a class="text-dark collapse-item" asp-area="" asp-controller="Products" asp-action="Create">新增</a>
+                    </div>
+                </div>
+            </li> *@
+
             <!-- Nav Item - 產品-元件管理 Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed"
@@ -196,28 +160,6 @@
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - 產品-產品管理 Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapse產品"
-                   aria-expanded="true"
-                   aria-controls="collapse產品">
-                    <i class="fas fa-fw fa-box-open"></i>
-                    <span>產品管理</span>
-                </a>
-                <div id="collapse產品"
-                     class="collapse"
-                     aria-labelledby="headingUtilities"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="Products" asp-action="List">檢視</a>
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="Products" asp-action="Create">新增</a>
-                    </div>
-                </div>
-            </li>
-
             <!-- Nav Item - 產品-客製化管理 Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed"
@@ -252,112 +194,44 @@
 
             <!-- Nav Item - 其他-優惠碼管理 Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapse優惠碼"
-                   aria-expanded="true"
-                   aria-controls="collapse優惠碼">
+                <a class="nav-link" asp-area="" asp-controller="PromoCode" asp-action="List">
                     <i class="fas fa-fw fa-barcode"></i>
                     <span>優惠碼管理</span>
                 </a>
-                <div id="collapse優惠碼"
-                     class="collapse"
-                     aria-labelledby="headingTwo"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="PromoCode" asp-action="List">檢視</a>
-                        @* <a class="text-dark collapse-item" asp-area="" asp-controller="*" asp-action="Revise">修改</a> *@
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="PromoCode" asp-action="Create">新增</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - 其他-客服管理 Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapseAdminService"
-                   aria-expanded="true"
-                   aria-controls="collapseAdminService">
+                <a class="nav-link" asp-area="" asp-controller="AdminServiceRecords" asp-action="List">
                     <i class="fas fa-fw fa-ad"></i>
                     <span>客服管理</span>
                 </a>
-                <div id="collapseAdminService"
-                     class="collapse"
-                     aria-labelledby="headingAdminService"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminServiceRecords" asp-action="List">檢視</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - 其他-輪播管理 Collapse Menu -->
+
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapseCarousel"
-                   aria-expanded="true"
-                   aria-controls="collapseCarousel">
+                <a class="nav-link" asp-area="" asp-controller="AdminImageCarousel" asp-action="List">
                     <i class="fas fa-fw fa-ad"></i>
                     <span>輪播管理</span>
                 </a>
-                <div id="collapseCarousel"
-                     class="collapse"
-                     aria-labelledby="headingCarousel"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminImageCarousel" asp-action="List">檢視</a>
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminImageCarousel" asp-action="Create">新增</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - 其他-數據管理 Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapseDatas"
-                   aria-expanded="true"
-                   aria-controls="collapseDatas">
+                <a class="nav-link" asp-area="" asp-controller="AdminDataAnlysis" asp-action="DataList">
                     <i class="fas fa-fw fa-chart-bar"></i>
                     <span>數據管理</span>
                 </a>
-                <div id="collapseDatas"
-                     class="collapse"
-                     aria-labelledby="headingDatas"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="AdminDataAnlysis" asp-action="DataList">檢視</a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - 其他-門市位置 Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed"
-                   href="#"
-                   data-toggle="collapse"
-                   data-target="#collapseDatas2"
-                   aria-expanded="true"
-                   aria-controls="collapseDatas2">
+                <a class="nav-link" asp-area="" asp-controller="StoreLocations" asp-action="Index">
                     <i class="fas fa-fw fa-chart-bar"></i>
-                    <span>門市位置表</span>
+                    <span>門市位置管理</span>
                 </a>
-                <div id="collapseDatas2"
-                     class="collapse"
-                     aria-labelledby="headingDatas2"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="text-dark collapse-item" asp-area="" asp-controller="StoreLocations" asp-action="Index">檢視</a>
-                    </div>
-                </div>
             </li>
-
             <!-- Divider -->
             <li>
                 <hr class="sidebar-divider d-none d-md-block" />

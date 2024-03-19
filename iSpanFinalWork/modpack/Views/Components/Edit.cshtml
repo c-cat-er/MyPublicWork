@@ -100,6 +100,36 @@
 </div>
 @section Scripts {
     <script>
-        unityInstance.SendMessage('MyGameObject', 'MyFunction');//用於呼叫unity方法
+        $(document).ready(function () {
+            $("#addCategory").click(function () {
+                var categoryCount = $(".categoryItem").length;
+                var newCategoryHtml =
+                    `<div class="categoryItem mb-3 row">
+                                    <div class="col-auto">
+                                    <input type="hidden" value="0" />
+                                    <input type="text" value=""  class="form-control"/>
+                                    </div>
+                                    <div class="col-auto">
+                                    <button type="button" class="removeCategory  btn btn-warning">刪除類別</button>
+                                    </div>
+                                    </div>`;
+                $("#categoryList").append(newCategoryHtml);
+            });
+            $(document).on("click", ".removeCategory", function () {
+                $(this).closest(".categoryItem").remove();
+            });
+            $("#ComponentForm").submit(function () {
+                var dynamicCategories = [];
+                $(".categoryItem").each(function () {
+                    dynamicCategories.push({
+                        CategoryID: parseInt($(this).find("input").eq(0).val()),
+                        Name: $(this).find("input").eq(1).val()
+                    });
+                });
+                var dynamicCategoriesJson = JSON.stringify(dynamicCategories);
+                $("#dynamicCategories").val(dynamicCategoriesJson);
+                debugger
+            });
+        });
     </script>
 }

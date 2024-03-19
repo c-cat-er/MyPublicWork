@@ -20,21 +20,24 @@
             var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
             var buildUrl = configuration.GetSection("Kestrel:Endpoints:Http:Url").Value;
         }
+            setTimeout(function () {
                 var config = {
-            dataUrl: "@buildUrl" + "/Build/CustWebGL.data",
-            frameworkUrl: "@buildUrl" + "/Build/CustWebGL.framework.js",
-            codeUrl: "@buildUrl" + "/Build/CustWebGL.wasm",
-        };
-        var script = document.createElement("script");
-        script.src = "@buildUrl" + "/Build/CustWebGL.loader.js";
-        script.onload = () => {
-            createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
-            }).then((unityInstance) => {
-            }).catch((message) => {
-                alert(message);
-            });
-        };
-        document.body.appendChild(script);
+                    dataUrl: "@buildUrl" + "/Build/CustWebGL.data",
+                    frameworkUrl: "@buildUrl" + "/Build/CustWebGL.framework.js",
+                    codeUrl: "@buildUrl" + "/Build/CustWebGL.wasm",
+                };
+                var script = document.createElement("script");
+                script.src = "@buildUrl" + "/Build/CustWebGL.loader.js";
+                script.onload = () => {
+                    createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
+                    }).then((unityInstance) => {
+                    }).catch((message) => {
+                        alert(message);
+                    });
+                };
+                document.body.appendChild(script);
+            }, 0);
+         
         var data = JSON.parse(sessionStorage.getItem("customizationData"));
         function jsreturnlist() {
             setTimeout(function () {

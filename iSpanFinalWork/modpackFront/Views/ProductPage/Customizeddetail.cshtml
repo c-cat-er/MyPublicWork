@@ -10,6 +10,11 @@
 </head>
 
 <body>
+    @{
+        var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
+        var VueUrl = configuration.GetSection("VueUrl").Value;
+        var buildUrl = configuration.GetSection("BackUrl").Value;
+    }
     <!-- breadcrumbs -->
     <section class="breadcrumbs bg-light">
         <div class="container">
@@ -18,7 +23,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">首頁</a></li>
-                            <li class="breadcrumb-item"><a href="listing-sidebar.html">商品列表</a></li>
+                            <li class="breadcrumb-item"><a href="@VueUrl/Custom_listing">客製化背包</a></li>
                             <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
                         </ol>
                     </nav>
@@ -26,11 +31,6 @@
             </div>
         </div>
     </section>
-
-    @{
-        var configuration = (IConfiguration)Context.RequestServices.GetService(typeof(IConfiguration));
-        var buildUrl = configuration.GetSection("BackUrl").Value;
-    }
     <!-- product -->
     <section class="hero bg-light pt-7">
         <div class="container">
@@ -44,9 +44,9 @@
                     <div class="row">
                         <div class="col-12">
                             <input type="hidden" asp-for="ProductId">
-                            <span class="item-brand">@Model.PromotionName</span>
-                            <h1 class="item-title">@Model.Name</h1>
-                            <span class="item-price">$@Model.SalePrice</span>
+                            <span class="item-brand" id="PromotionName">@Model.PromotionName</span>
+                            <h1 class="item-title" id="productName">@Model.Name</h1>
+                            <span class="item-price" id="productSalePrice">$@Model.SalePrice</span>
                         </div>
                     </div>
                     <section>
@@ -90,12 +90,17 @@
                                                             {
                                                                 <label id="Customized,@Model.Customizedid[i]" class="btn active mb-3" style="width:156px; height:225px;background-image:url(@buildUrl/images/Customized/@Model.CustomizedImageFileName[i]);color:transparent">
                                                                     <input type="radio" name="options" id="option1-2">
+                                                                    <input type="hidden" name="options" id="CustomizedName" value=@Model.CustomizedName[i]>
+                                                                    <input type="hidden" name="options" id="CustomizedSalePrice" value=$@Model.CustomizedSalePrice[i]>
                                                                 </label>
                                                             }
                                                             else
                                                             {
+                                                                <input type="hidden" id="customizedIndex" value=@i />
                                                                 <label id="Customized,@Model.Customizedid[i]" class="btn mb-3" style="width:156px; height:225px;background-image:url(@buildUrl/images/Customized/@Model.CustomizedImageFileName[i]);color:transparent">
                                                                     <input type="radio" name="options" id="option1-2">
+                                                                    <input type="hidden" name="options" id="CustomizedName" value=@Model.CustomizedName[i]>
+                                                                    <input type="hidden" name="options" id="CustomizedSalePrice" value=$@Model.CustomizedSalePrice[i]>
                                                                 </label>
                                                             }
                                                         }
@@ -180,20 +185,31 @@
 
             $("label[id^='Inspiration']").click(function () {
                 id = $(this).attr("id").split(",")[1];
+                $("#productName").html("@Model.Name");
+                $("#productSalePrice").text(`$${@Model.SalePrice}`);
                 gameInstance.SendMessage('changeback', 'changpack', $(this).attr("id"));//用於呼叫unity方法
             });
+
             $("label[id^='Customized']").click(function () {
                 id = $(this).attr("id").split(",")[1];
+                $("#productName").html($(this).find("input[id='CustomizedName']").val());
+                $("#productSalePrice").html($(this).find("input[id='CustomizedSalePrice']").val());
                 gameInstance.SendMessage('changeback', 'changpack', $(this).attr("id"));//用於呼叫unity方法
             });
             $("#tab-Inspiration").click(function () {
                 id = $("#GroupInspiration .active").attr("id").split(",")[1];
                 type = "Inspiration"
+                $("#productName").html("@Model.Name");
+                $("#productSalePrice").text(`$${@Model.SalePrice}`);
+                gameInstance.SendMessage('changeback', 'changpack', $("#GroupInspiration .active").attr("id"));//用於呼叫unity方法
             });
             $("#tab-Customized").click(function () {
                 if (@Model.Customizedid.Count != 0) {
                     id = $("#GroupCustomized .active").attr("id").split(",")[1];
                     type = "Customized";
+                    $("#productName").html($("#GroupCustomized .active").find("input[id='CustomizedName']").val());
+                    $("#productSalePrice").html($("#GroupCustomized .active").find("input[id='CustomizedSalePrice']").val());
+                    gameInstance.SendMessage('changeback', 'changpack', $("#GroupCustomized .active").attr("id"));//用於呼叫unity方法
                 }
                 else{
                     $('#tab-Inspiration').click();
@@ -224,7 +240,7 @@
                     },
                     body: JSON.stringify(data)
                     }).then(response => {
-                        if (!response.ok) {
+                    if (response.status != 200) {
                             throw new Error("Network response was not ok");
                         }
                     }).then(data => {
@@ -243,14 +259,24 @@
                         "Content-Type": "application/json"
                     },
                 }).then(response => {
-                    if (!response.ok) {
+                    if (response.status!=200) {
                         throw new Error("Network response was not ok");
                     }
                     $("#Customized\\," + id).remove();
                     var remainingLabels = $("[id^='Customized\\,']").length;
-                    if (remainingLabels === 0) {
+                    if (remainingLabels == 0) {
                         $("#deleteCustomized").remove();
                         $('#tab-Inspiration').click();
+                    }
+                    else{
+                        id = $("label[id^='Customized']").attr("id").split(",")[1];
+                        $("[id^='Customized\\," + id + "']").filter(function () {
+                            return $(this).attr("id") === "Customized," + id;
+                        }).addClass("active");
+                        $("#productName").html($("label[id^='Customized']").find("input[type='radio']").val());
+                        $("#productName").html($("label[id^='Customized']").find("input[id='CustomizedName']").val());
+                        $("#productSalePrice").html($("label[id^='Customized']").find("input[id='CustomizedSalePrice']").val());
+                        gameInstance.SendMessage('changeback', 'changpack', $("label[id^='Customized']").attr("id"));//用於呼叫unity方法
                     }
                 }).then(data => {
                     alert("已刪除客製化");

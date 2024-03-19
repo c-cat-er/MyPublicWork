@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using modpack.Controllers;
 using modpack.Data;
 using modpack.Models;
@@ -29,7 +30,12 @@ namespace modpack
             {
                 option.AddPolicy(name: CorsPolicy, policy =>
                 {
-                    policy.WithOrigins("*").WithHeaders("*").WithMethods("*");
+                    policy.WithOrigins("http://localhost:7252");
+                    policy.WithMethods("GET", "POST");
+                    policy.AllowCredentials()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
                 });
             });
 
@@ -62,7 +68,6 @@ namespace modpack
                     options.AccessDeniedPath = "/Account/AccessDenied"; // 拒絕訪問的路徑
                     options.SlidingExpiration = true; // 啟用滑動過期
                 });
-            // websocket
             builder.Services.AddSignalR();
 
 
@@ -72,7 +77,7 @@ namespace modpack
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
-                app.UseDeveloperExceptionPage();    // 需要?
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -94,8 +99,6 @@ namespace modpack
             app.UseRouting();
             app.UseSession();   //. 啟用 session.
             app.UseAuthorization();     //. 啟用 cookie.
-            app.UseWebSockets();    // 啟用 websocket
-
 
             app.MapControllers();
             app.MapControllerRoute(
@@ -104,9 +107,10 @@ namespace modpack
             app.MapRazorPages();
 
             app.UseEndpoints(endpoints =>
-            {//websocket
+            {
                 endpoints.MapControllers();
                 endpoints.MapHub<ImageCarouselHub>("/imageCarouselHub");
+                endpoints.MapHub<ServiceRecordsHub>("/serviceRecordsHub");
             });
 
             app.Run();

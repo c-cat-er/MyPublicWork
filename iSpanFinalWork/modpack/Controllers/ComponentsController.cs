@@ -96,7 +96,7 @@ namespace modpack.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                string apiBaseUrl = "http://localhost:7250";
+                string apiBaseUrl = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build().GetSection("ApiUrl").Value;
                 var response = await httpClient.DeleteAsync($"{apiBaseUrl}/api/Components/" + id);
                 return RedirectToAction("List");
             }
@@ -132,7 +132,14 @@ namespace modpack.Controllers
                 }
             }
         }
-
+        [ResponseCache(NoStore = true)]
+        public async Task<string> imageDelete()
+        {
+            StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8);
+            string requestBody = await reader.ReadToEndAsync();
+            System.IO.File.Delete(imagepath + requestBody);
+            return "";
+        }
         [ResponseCache(NoStore = true)]
         public async Task<IActionResult> ViewImage(int id)
         {

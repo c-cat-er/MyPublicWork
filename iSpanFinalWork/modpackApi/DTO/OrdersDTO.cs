@@ -11,6 +11,8 @@ namespace modpackApi.DTO
         public string memberName {  get; set; }
         public string shippingName {  get; set; }
 
+        public decimal? shippingCost { get; set; }
+
         public string shippingStatusName {  get; set; }
 
         public string orderStatusName { get; set; }

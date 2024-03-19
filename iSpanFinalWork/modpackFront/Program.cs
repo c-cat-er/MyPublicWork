@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using modpackFront.Data;
 using modpackFront.Models;
-using Microsoft.AspNetCore.Authentication.Cookies; // ¤Þ¤J Cookie ¨­¥÷ÅçÃÒªº©R¦WªÅ¶¡
+using Microsoft.AspNetCore.Authentication.Cookies; // ï¿½Þ¤J Cookie ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Rï¿½Wï¿½Å¶ï¿½
 
 namespace modpackFront
 {
@@ -12,52 +12,59 @@ namespace modpackFront
         public static void Main(string[] args)
         {
 
-            //§ì¨ú«e­±ºô§}
-            // ªì©l¤Æ°t¸mÀÉ®×Åª¨ú
+            //ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½}
+            // ï¿½ï¿½lï¿½Æ°tï¿½mï¿½É®ï¿½Åªï¿½ï¿½
             string? xx = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build().GetSection("Kestrel").GetSection("Endpoints").GetSection("Http").GetSection("Url").Value;
             var builder = WebApplication.CreateBuilder(args);
 
-            // °t¸m¸ê®Æ®w¤W¤U¤å
+            // ï¿½tï¿½mï¿½ï¿½Æ®wï¿½Wï¿½Uï¿½ï¿½
             builder.Services.AddDbContext<ModPackContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("modpack"));
             });
 
-            // ³]©w¸ó¨Ó·½¸ê·½¦@¨É(CORS)¬Fµ¦
+            // ï¿½]ï¿½wï¿½ï¿½Ó·ï¿½ï¿½ê·½ï¿½@ï¿½ï¿½(CORS)ï¿½Fï¿½ï¿½
             string CorsPolicy = "AllowAny";
             builder.Services.AddCors(option =>
             {
                 option.AddPolicy(name: CorsPolicy, policy =>
                 {
-                    policy.WithOrigins("*").WithHeaders("*").WithMethods("*");
+                    policy.WithOrigins("http://localhost:7251");
+                    policy.WithMethods("GET", "POST");
+                    policy.AllowCredentials()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials();
                 });
             });
 
-            // °t¸mÀ³¥Îµ{¦¡ªº¸ê®Æ®w¤W¤U¤å©M¨Ò¥~­¶­±
+            // ï¿½tï¿½mï¿½ï¿½ï¿½Îµ{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®wï¿½Wï¿½Uï¿½ï¿½Mï¿½Ò¥~ï¿½ï¿½ï¿½ï¿½
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            // ³]©w¹w³]¨­¥÷ÅçÃÒ¤è¦¡¬° Identity
+            // ï¿½]ï¿½wï¿½wï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¤è¦¡ï¿½ï¿½ Identity
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            // ·s¼W Cookie ¨­¥÷ÅçÃÒªA°È
+            // ï¿½sï¿½W Cookie ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªAï¿½ï¿½
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/Login/Login"; // «ü©wµn¤J¸ô®|
-                    options.LogoutPath = "/Login/Logout"; // «ü©wµn¥X¸ô®|
-                    // ¦b¦¹¥i¥H³]©w§ó¦h Cookie ¿ï¶µ¡A¨Ò¦p¹L´Á®É¶¡µ¥
+                    options.LoginPath = "/Login/Login"; // ï¿½ï¿½ï¿½wï¿½nï¿½Jï¿½ï¿½ï¿½|
+                    options.LogoutPath = "/Login/Logout"; // ï¿½ï¿½ï¿½wï¿½nï¿½Xï¿½ï¿½ï¿½|
+                    // ï¿½bï¿½ï¿½ï¿½iï¿½Hï¿½]ï¿½wï¿½ï¿½h Cookie ï¿½ï¶µï¿½Aï¿½Ò¦pï¿½Lï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½
                 });
 
-            // ·s¼W MVC ±±¨î¾¹»Pµø¹Ïªº¤ä«ù
+            // ï¿½sï¿½W MVC ï¿½ï¿½ï¿½î¾¹ï¿½Pï¿½ï¿½ï¿½Ïªï¿½ï¿½ï¿½ï¿½
             builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization().AddViewLocalization();
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
-            // °t¸m HTTP ½Ð¨D³B²zºÞ¹D
+            // ï¿½tï¿½m HTTP ï¿½Ð¨Dï¿½Bï¿½zï¿½Þ¹D
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
@@ -68,13 +75,13 @@ namespace modpackFront
                 app.UseHsts();
             }
 
-            // ±Ò¥Î CORS
+            // ï¿½Ò¥ï¿½ CORS
             app.UseCors(CorsPolicy);
 
-            // ±Ò¥Î HTTPS ­«©w¦V
+            // ï¿½Ò¥ï¿½ HTTPS ï¿½ï¿½ï¿½wï¿½V
             app.UseHttpsRedirection();
 
-            // ³]©wÀRºAÀÉ®×ªº¤º®eÃþ«¬
+            // ï¿½]ï¿½wï¿½Rï¿½Aï¿½É®×ªï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½
             var provider = new FileExtensionContentTypeProvider();
             provider.Mappings[".data"] = "application/binary";
             app.UseStaticFiles(new StaticFileOptions
@@ -82,23 +89,22 @@ namespace modpackFront
                 ContentTypeProvider = provider
             });
 
-            // °t¸m¸ô¥Ñ
+            // ï¿½tï¿½mï¿½ï¿½ï¿½ï¿½
             app.UseRouting();
 
-            // ±Ò¥Î¨­¥÷ÅçÃÒ
+            // ï¿½Ò¥Î¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             app.UseAuthentication();
-            // ±Ò¥Î±ÂÅv
+            // ï¿½Ò¥Î±ï¿½ï¿½v
             app.UseAuthorization();
 
-            // °t¸m MVC ¸ô¥Ñ
+            // ï¿½tï¿½m MVC ï¿½ï¿½ï¿½ï¿½
             app.MapControllers();
             app.MapControllerRoute(
                 name: "Home",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.MapRazorPages();
 
-            // ±Ò°ÊÀ³¥Îµ{¦¡
+            // ï¿½Ò°ï¿½ï¿½ï¿½ï¿½Îµ{ï¿½ï¿½
             app.Run();
         }
     }

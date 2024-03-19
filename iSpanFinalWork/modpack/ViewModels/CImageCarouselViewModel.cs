@@ -18,9 +18,6 @@ namespace modpack.ViewModels
 
         public IFormFile photo { get; set; }
 
-        // 是否有上傳圖像標識
-        public bool IsPhotoUpdated { get; set; }
-
         [DisplayName("相關文字")]
         public string aImageDescription { get; set; }
     }

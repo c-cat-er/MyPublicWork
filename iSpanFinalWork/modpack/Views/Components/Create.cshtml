@@ -96,7 +96,6 @@
                     `<div class="categoryItem mb-3 row">
                             <div class="col-auto">
                             <input type="hidden" value="0" />
-                            <input type="hidden" value="0" />
                             <input type="text" value=""  class="form-control"/>
                             </div>
                             <div class="col-auto">
@@ -112,9 +111,8 @@
                 var dynamicCategories = [];
                 $(".categoryItem").each(function () {
                     dynamicCategories.push({
-                        CategoryID: parseInt($(this).find("input").eq(0).val()),
-                        ComponentID: parseInt($(this).find("input").eq(1).val()),
-                        Name: $(this).find("input").eq(2).val()
+                        ComponentID: parseInt($(this).find("input").eq(0).val()),
+                        Name: $(this).find("input").eq(1).val()
                     });
                 });
                 var dynamicCategoriesJson = JSON.stringify(dynamicCategories);

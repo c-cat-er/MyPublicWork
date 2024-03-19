@@ -5,7 +5,6 @@ using System.Runtime.Intrinsics.X86;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +15,7 @@ using modpack.ViewModels;
 using modpack.Wrap;
 using Microsoft.AspNetCore.SignalR;
 using modpack.Service;
+using X.PagedList;
 
 namespace modpack.Controllers
 {
@@ -36,34 +36,36 @@ namespace modpack.Controllers
         }
 
         // GET: AdminCarouselImage
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string searchStringDescription, int page = 1, int pageSize = 10)
         {
-            List<CImageCarouselViewModel> caVM = await _context.ImageCarousels
+            IQueryable<CImageCarouselViewModel> caVM = _context.ImageCarousels
                 .Select(carousel => new CImageCarouselViewModel
                 {
                     aImageCarouselID = carousel.ImageCarouselId,
                     aImageFile = carousel.Image,
                     aImageDescription = carousel.Description
-                })
-                .ToListAsync();
-            return View(caVM);
+                });
+
+            if (!string.IsNullOrEmpty(searchStringDescription))
+                caVM = caVM.Where(a => a.aImageDescription.Contains(searchStringDescription));
+            var result = await caVM.ToPagedListAsync(page, pageSize);
+
+            if (result.Count == 0)
+                ViewBag.NoSearchResults = true;
+            else
+                ViewBag.NoSearchResults = false;
+            return View(result);
         }
 
         // GET: AdminCarouselImage/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var imageCarousel = await _context.ImageCarousels
                 .FirstOrDefaultAsync(m => m.ImageCarouselId == id);
             if (imageCarousel == null)
-            {
                 return NotFound();
-            }
-
             return View(imageCarousel);
         }
 
@@ -88,21 +90,17 @@ namespace modpack.Controllers
                 ModelState.AddModelError("aImageDescription", "尚未輸入相關文字");
                 return View(iVM);
             }
-
             string photoName = "carousel" + Guid.NewGuid().ToString().Substring(0, 3) + ".jpeg";
             //string photoName = "carousel" + newImage.ImageCarouselId.ToString() + ".jpeg";
             using (var fileStream = new FileStream(Path.Combine(_environment.WebRootPath, "images/carousel", photoName), FileMode.Create))
             {
                 await iVM.photo.CopyToAsync(fileStream);
             }
-            //newImage.Image = photoName;
-
             ImageCarousel newImage = new ImageCarousel
             {
                 Image = photoName,
                 Description = iVM.aImageDescription
             };
-
             _context.Add(newImage);
             await _context.SaveChangesAsync();
             return RedirectToAction("List");
@@ -112,10 +110,7 @@ namespace modpack.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
             var im = await _context.ImageCarousels.FindAsync(id);
             var vm = new CImageCarouselViewModel
             {
@@ -146,6 +141,9 @@ namespace modpack.Controllers
                 }
                 icEdit.Description = iVM.aImageDescription;
                 await _context.SaveChangesAsync();
+                var imagePaths = await _context.ImageCarousels.Select(ic => ic.Image).ToListAsync();
+                var descriptions = await _context.ImageCarousels.Select(ic => ic.Description).ToListAsync();
+                await _hubContext.Clients.All.SendAsync("ReceiveImagePaths", imagePaths, descriptions);
             }
             return RedirectToAction("List");
         }
@@ -155,17 +153,13 @@ namespace modpack.Controllers
             var imageCarousel = await _context.ImageCarousels
                 .FirstOrDefaultAsync(m => m.ImageCarouselId == id);
             if (imageCarousel == null)
-            {
                 return NotFound();
-            }
-
             var cWAdmin = new CWrapAdministrator
             {
                 ImageCarouselID = imageCarousel.ImageCarouselId,
                 ImageFile = imageCarousel.Image,
                 Description = imageCarousel.Description
             };
-
             return View(cWAdmin);
         }
 
@@ -176,37 +170,9 @@ namespace modpack.Controllers
         {
             var imageCarousel = await _context.ImageCarousels.FindAsync(id);
             if (imageCarousel != null)
-            {
                 _context.ImageCarousels.Remove(imageCarousel);
-            }
-
             await _context.SaveChangesAsync();
             return RedirectToAction("List");
-        }
-
-        // GET: /images/{ids}
-        [HttpGet("AdminImageCarousel/images")]
-        public IActionResult GetImage([FromQuery] string ids)
-        {
-            try
-            {
-                var idArray = ids.Split(',').Select(id => int.Parse(id)).ToList();
-                var imagePaths = new List<string>();
-                foreach (var id in idArray)
-                {
-                    var imagePath = $"/images/carousel/carousel{id}.jpeg";
-                    imagePaths.Add(imagePath);
-                }
-
-                // 发送更新到所有客户端
-                _hubContext.Clients.All.SendAsync("ReceiveImagePaths", imagePaths);
-
-                return Ok(imagePaths);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"找不到圖片: {ex.Message}");
-            }
         }
 
         // GET: /imagesTwo/{ids}
@@ -234,7 +200,6 @@ namespace modpack.Controllers
                         SalePrice = p.SalePrice,
                     })
                     .ToListAsync();
-
                 return Ok(JsonSerializer.Serialize(productList));
                 //return Json(productList);
             }

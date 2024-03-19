@@ -1,9 +1,4 @@
 ﻿@model modpack.Models.ServiceRecord
-
-@{
-    ViewData["Title"] = "Details";
-}
-
 <h1>回覆管理</h1>
 <hr />
 <div>
@@ -56,5 +51,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.RecordId">回覆</a>
-    <a asp-action="Index">取消返回</a>
+    <a asp-action="List">取消返回</a>
 </div>

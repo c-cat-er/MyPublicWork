@@ -2,16 +2,12 @@
 @using X.PagedList;
 @using X.PagedList.Mvc;
 @using X.PagedList.Mvc.Core;
-@{
-    ViewData["Title"] = "List";
-}
-
-<h1><span asp-for="TitleID"></span>部門管理</h1>
-<p><a asp-action="Create">新增管理者</a></p>
+<h1><span asp-for="TitleID"></span>職級管理</h1>
+<p><a type="submit" asp-action="Create" class="btn btn-primary btn-addData"><span>新增管理者</span></a></p>
 <hr />
 <div class="form-group">
     <form asp-action="List" method="get" style="display: flex; align-items: center;">
-        <input class="form-control" placeholder="請輸入關鍵字" style="width: 300px;" />
+        <input class="form-control" placeholder="請輸入姓名" style="width: 300px;" />
         <button type="submit" class="btn btn-primary">搜索</button>
     </form>
 </div>
@@ -20,32 +16,31 @@
         <tr>
             <th>
                 序
-                <span asp-for="@Model.First().AdminID"></span>
+                <span class="lb-com" asp-for="@Model.First().AdminID"></span>
             </th>
             <th>
                 職級
-                <span asp-for="@Model.First().TitleID"></span>
+                <span class="lb-com" asp-for="@Model.First().TitleID"></span>
             </th>
             <th>
                 姓名
-                <span asp-for="@Model.First().AdminName"></span>
+                <span class="lb-com" asp-for="@Model.First().AdminName"></span>
             </th>
             <th>
                 管理者編號
-                <span asp-for="@Model.First().aAdminCode"></span>
+                <span class="lb-com" asp-for="@Model.First().aAdminCode"></span>
             </th>
             <th>
                 照片
-                <span asp-for="@Model.First().AdminImage"></span>
+                <span class="lb-com" asp-for="@Model.First().AdminImage"></span>
             </th>
             <th>
                 帳號
-                <span asp-for="@Model.First().AdminAccount"></span>
+                <span class="lb-com" asp-for="@Model.First().AdminAccount"></span>
             </th>
             <th>
                 密碼
                 <span asp-for="@Model.First().AdminPassword"></span>
-                @*<span type="hidden" asp-for="@Model.First().AdminPassword"></span>*@
             </th>
             <th></th>
         </tr>
@@ -59,31 +54,29 @@
                 <tr>
                     <td>
                         @count
-                        @*
-                        @Html.DisplayFor(modelItem => item.AdminID)
-                        *@
+                        @* @Html.DisplayFor(modelItem => item.AdminID) *@
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TitleName)
+                        @item.TitleName
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AdminName)
+                        @item.AdminName
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.aAdminCode)
+                        @item.aAdminCode
                     </td>
                     <td>
-                        @* <img src="~/images/admin/@item.AdminImage" width="80" height="60" /> *@
+                        <img src="~/images/admin/@item.AdminImage" width="80" height="60" />
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AdminAccount)
+                        @item.AdminAccount
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AdminPassword)
+                        @item.AdminPassword.Replace(item.AdminPassword, new string('*', item.AdminPassword.Length))
                     </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.AdminID">編輯</a>
-                        <a asp-action="Delete" asp-route-id="@item.AdminID" onclick="return confirm('確定要刪除嗎?')">刪除</a>
+                    <td style="display: flex; align-items: center;">
+                        <a href="javascript: void(0)" class="btn-edit" onclick="location.href='@Url.Action("Edit", new { id = item.AdminID })'">編輯<span></span><span></span><span></span><span></span></a>
+                        @* <a href="javascript: void(0)" class="btn-delete" onclick="if (confirm('確定要刪除嗎?')) { location.href='@Url.Action("Delete", new { id = item.AdminID })' }">刪除</a> *@
                     </td>
                 </tr>
             }
@@ -91,3 +84,7 @@
     </tbody>
 </table>
 @Html.PagedListPager((IPagedList)Model, x => Url.Action("List", new { page = x }))
+@section Styles {
+    <link rel="stylesheet" href="~/css/label-style.css" />
+    <link rel="stylesheet" href="~/css/table-style.css" />
+}

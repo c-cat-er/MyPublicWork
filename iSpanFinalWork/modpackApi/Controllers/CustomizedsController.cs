@@ -305,7 +305,7 @@ namespace modpackApi.Controllers
             var Customized = await _context.Customizeds.FindAsync(id);
             if (Customized == null)
             {
-                return "刪除客製化失敗";
+                return null;
             }
             try
             {
@@ -319,19 +319,19 @@ namespace modpackApi.Controllers
                     }
                     catch (DbUpdateException ex)
                     {
-                        return "刪除客製化失敗";
+                        return null;
                     }
                 }
                 _context.Customizeds.Remove(Customized);
+                await _context.SaveChangesAsync();
                 string content = Customized.ImageFileName;
                 HttpClient client = new HttpClient();
                 string imageUrl = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("appsettings.json").Build().GetSection("imageUrl").Value;
                 HttpResponseMessage response = await client.PutAsync($"{imageUrl}/Customized/imageDelete", new StringContent(content, Encoding.UTF8, "text/plain"));
-                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
-                return "刪除客製化失敗";
+                return null;
             }
             return "刪除客製化成功";
         }

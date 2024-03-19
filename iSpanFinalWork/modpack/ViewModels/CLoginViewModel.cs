@@ -17,9 +17,5 @@ namespace modpack.ViewModels
         [MaxLength(10)]
         [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "密碼錯誤(只能包含英文字母和數字)")]
         public string txtPassword { get; set; }
-
-        public string txtError { get; set; }
-
-        public string adminUser { get; set; }
     }
 }
